@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for(int i  = 0; i < 300  ; i++)
+
         formElements.add(new FormElement(
                 TextElementViewHolder.class,
-                new TextFiledFormObj(0,"First Text" + i,"cool" + i,true),
+                new TextFiledFormObj(0, "First Text", "cool",true),
                 R.layout.text_element_layout));
 
         RecyclerView rView = findViewById(R.id.recyclerView);
