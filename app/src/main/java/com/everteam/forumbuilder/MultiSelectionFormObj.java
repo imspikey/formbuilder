@@ -23,7 +23,6 @@ public class MultiSelectionFormObj extends BaseFormObj {
         this.mSelectionValues = selectionValues;
     }
 
-
     public boolean ismIsRequired() {
         return mIsRequired;
     }
