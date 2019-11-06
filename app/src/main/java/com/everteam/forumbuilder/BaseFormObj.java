@@ -7,8 +7,17 @@ public class BaseFormObj {
     private int mId = 0;
     private String mLabel;
     private String mValue;
+    private BaseThemeConfig mBaseThemeConfig;
+
 
     Function<Boolean, String> validationAddon =  null;
+
+    BaseFormObj(int id, String label,BaseThemeConfig baseThemeConfig){
+        this.mId = id;
+        this.mLabel = label;
+        this.mBaseThemeConfig = baseThemeConfig;
+    }
+
 
     BaseFormObj(int id, String label){
         this.mId = id;
@@ -32,5 +41,13 @@ public class BaseFormObj {
 
     public int getId() {
         return mId;
+    }
+
+    public BaseThemeConfig getBaseThemeConfig() {
+        return mBaseThemeConfig;
+    }
+
+    public void setBaseThemeConfig(BaseThemeConfig baseThemeConfig) {
+        this.mBaseThemeConfig = baseThemeConfig;
     }
 }
