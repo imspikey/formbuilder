@@ -22,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
                 TextElementViewHolder.class,
                 new TextFiledFormObj(0, "First Text", "cool",true),
                 R.layout.text_element_layout));
+        formElements.add(new FormElement(
+                MultiSelectionFormViewHolder.class,
+                new MultiSelectionFormObj(
+                        0,
+                        "First Text",
+                        true,
+                        true,
+                        null,
+                        null),
+                R.layout.multiple_selection_layout));
 
         RecyclerView rView = findViewById(R.id.recyclerView);
 

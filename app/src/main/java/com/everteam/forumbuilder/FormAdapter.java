@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -14,8 +13,8 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
     List<FormElement> mFormElements;
 
-    FormAdapter(List<FormElement> mFormElemets){
-        this.mFormElements = mFormElemets;
+    FormAdapter(List<FormElement> mFormEmFormElements){
+        this.mFormElements = mFormEmFormElements;
     }
 
     @NonNull
@@ -27,7 +26,6 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
                  formElement.getLayout(),
                  viewGroup,
                  false);
-
 
         String className = formElement.getFormElementViewHolder().getName();
         Class<?>  c = null;

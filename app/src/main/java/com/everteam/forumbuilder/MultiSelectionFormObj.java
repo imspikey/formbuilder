@@ -6,21 +6,26 @@ import java.util.ArrayList;
 public class MultiSelectionFormObj extends BaseFormObj {
 
     private boolean mIsRequired = false;
-    private boolean mIsMultiSelect = false;
+    private boolean mIsMultiSelect;
 
     private ArrayList<String> mSelectionValues;
+    private ArrayList<Integer> mSelectedIndexes = new ArrayList<>();
 
-    MultiSelectionFormObj(int id, String label,boolean isRequired, ArrayList<String> selectionValues) {
+    MultiSelectionFormObj(int id, String label, boolean isRequired, boolean mIsMultiSelect, ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes) {
         super(id, label);
         this.mIsRequired = isRequired;
+        this.mIsMultiSelect = mIsMultiSelect;
         this.mSelectionValues = selectionValues;
+        this.mSelectedIndexes = mSelectedIndexes;
     }
 
-    MultiSelectionFormObj(int id, String label, String value,boolean isRequired, ArrayList<String> selectionValues) {
+    MultiSelectionFormObj(int id, String label, String value, boolean isRequired, boolean mIsMultiSelect, ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes) {
         super(id, label, value);
 
         this.mIsRequired = isRequired;
+        this.mIsMultiSelect = mIsMultiSelect;
         this.mSelectionValues = selectionValues;
+        this.mSelectedIndexes = mSelectedIndexes;
     }
 
     public boolean ismIsRequired() {
@@ -33,5 +38,13 @@ public class MultiSelectionFormObj extends BaseFormObj {
 
     public ArrayList<String> getSelectionValues() {
         return mSelectionValues;
+    }
+
+    public ArrayList<Integer> getSelectedIndexes() {
+        return mSelectedIndexes;
+    }
+
+    public void setSelectedIndexes(ArrayList<Integer> mSelectedIndexes) {
+        this.mSelectedIndexes = mSelectedIndexes;
     }
 }
