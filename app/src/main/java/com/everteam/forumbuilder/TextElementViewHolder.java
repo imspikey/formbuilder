@@ -5,10 +5,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.everteam.forumbuilder.R;
-
 public class TextElementViewHolder extends AFormElementViewHolder {
 
+    TextFiledThemeConfig mainTextFiledThemeConfig,customTextFiledThemeConfig;
     TextFiledFormObj textFiledFormObj;
     TextView tv;
     EditText et;
@@ -22,8 +21,27 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
     @Override
     void onBind(BaseFormObj baseFormObj) {
-        textFiledFormObj = (TextFiledFormObj) baseFormObj;
-        tv.setText(textFiledFormObj.getLable());
+
+        textFiledFormObj  =  (TextFiledFormObj)baseFormObj;
+
+        TextFiledThemeConfig config = (TextFiledThemeConfig) textFiledFormObj.getBaseThemeConfig();
+
+        TextFiledFormObj currTextFiledFormObj;
+        if(customTextFiledThemeConfig != null)
+            config = customTextFiledThemeConfig;
+        else
+            config = mainTextFiledThemeConfig;
+
+        tv.setText(textFiledFormObj.getLabel());
         et.setText(textFiledFormObj.getValue());
+
+        et.setTextColor(config.getTextColor());
+        et.setBackgroundColor(config.getBackgroundColor());
+    }
+
+    @Override
+    void onBind(BaseFormObj baseFormObj, BaseThemeConfig customTextFiledThemeConfig) {
+        this.customTextFiledThemeConfig = (TextFiledThemeConfig)customTextFiledThemeConfig;
+        onBind(baseFormObj);
     }
 }

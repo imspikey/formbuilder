@@ -76,6 +76,11 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
         mMultiSelectionFormObj = (MultiSelectionFormObj) baseFormObj;
 
     }
+
+    @Override
+    void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
+
+    }
 }
 
 

@@ -2,13 +2,12 @@ package com.everteam.forumbuilder;
 
 import android.arch.core.util.Function;
 
-public class BaseFormObj {
+public abstract  class BaseFormObj {
 
     private int mId = 0;
     private String mLabel;
     private String mValue;
     private BaseThemeConfig mBaseThemeConfig;
-
 
     Function<Boolean, String> validationAddon =  null;
 
@@ -25,17 +24,18 @@ public class BaseFormObj {
     }
 
 
-    BaseFormObj(int id, String label, String value ){
+    BaseFormObj(int id, String label, String value,BaseThemeConfig mBaseThemeConfig ){
         this.mId = id;
         this.mLabel = label;
         this.mValue = value;
+        this.mBaseThemeConfig = mBaseThemeConfig;
     }
 
-    public String getLable() {
+     String getLabel() {
         return mLabel;
     }
 
-    public String getValue() {
+     String getValue() {
         return mValue;
     }
 

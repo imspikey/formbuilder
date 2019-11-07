@@ -13,4 +13,9 @@ class FormElementViewHolder extends AFormElementViewHolder {
     void onBind(BaseFormObj baseFormObj) {
 
     }
+
+    @Override
+    void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
+
+    }
 }

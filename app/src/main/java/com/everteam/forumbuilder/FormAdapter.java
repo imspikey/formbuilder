@@ -1,5 +1,6 @@
 package com.everteam.forumbuilder;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +12,19 @@ import java.util.List;
 
 public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
-    List<FormElement> mFormElements;
+    List<FormElement>     mFormElements;
+    TextFiledThemeConfig  textFiledThemeConfig;
+    MultiSelectThemConfig multiSelectThemConfig;
 
     FormAdapter(List<FormElement> mFormEmFormElements){
+
         this.mFormElements = mFormEmFormElements;
+
+        multiSelectThemConfig = new MultiSelectThemConfig.Builder().
+                setBackgoudnColor(Color.WHITE).build();
+
+        textFiledThemeConfig  = new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
+                setBackgoudnColor(Color.BLACK).build();
     }
 
     @NonNull
@@ -31,11 +41,21 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
         Class<?>  c = null;
         try {
             c = Class.forName(className);
+
             Constructor<?> cons = c.getConstructor(View.class);
-            Object v = cons.newInstance(view);
 
-
-        return  (AFormElementViewHolder) v;
+            Object v;
+            v = cons.newInstance(view);
+//            Object v;
+//            if(c.getName().equals(TextFiledFormObj.class.getName()))
+//            v = cons.newInstance(view);
+//
+//            if(c.getName().equals(MultiSelectionFormObj.class.getName()))
+//                v = cons.newInstance(view);
+//            else{
+//                v = cons.newInstance(view);
+//            }
+            return  (AFormElementViewHolder) v;
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -55,7 +75,15 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AFormElementViewHolder aFormElementViewHolder, int i) {
 
+        if(aFormElementViewHolder instanceof MultiSelectionFormViewHolder)
         aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject());
+
+        if(aFormElementViewHolder instanceof TextElementViewHolder)
+        aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), textFiledThemeConfig);
+
+        else{
+            aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject());
+        }
     }
 
     @Override

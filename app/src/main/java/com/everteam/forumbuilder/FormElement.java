@@ -21,19 +21,19 @@ public class FormElement<A extends AFormElementViewHolder >
 //        this.mBaseFormObject = BaseFormObj;
 //    }
         //
-    public FormElement( Class<AFormElementViewHolder> mFormElementViewHolder ,BaseFormObj mBaseFormObject, int layoutId) {
+     FormElement( Class<AFormElementViewHolder> mFormElementViewHolder ,BaseFormObj mBaseFormObject, int layoutId) {
         super(layoutId);
         this.mBaseFormObject = mBaseFormObject;
         this.mFormElementViewHolder = mFormElementViewHolder;
     }
 
-    public Class<?> getFormElementViewHolder()
+     Class<?> getFormElementViewHolder()
    {
        return mFormElementViewHolder;
    }
 
 
-  public BaseFormObj getBaseFormObject() {
+   BaseFormObj getBaseFormObject() {
         return mBaseFormObject;
     }
 }

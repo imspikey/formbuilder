@@ -10,5 +10,6 @@ public abstract class AFormElementViewHolder extends RecyclerView.ViewHolder {
         super(itemView); }
 
     abstract void onBind(BaseFormObj baseFormObj);
+    abstract void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig);
 
 }
