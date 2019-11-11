@@ -6,6 +6,9 @@ class TextFiledThemeConfig extends BaseThemeConfig {
 
         private  int mTextColor;
         private  int mBackgroundColor;
+        private  int lableColor;
+        private  int lableFont;
+        private  int lableText;
 
         public Builder setBackgoudnColor(int backGroundColor){
 

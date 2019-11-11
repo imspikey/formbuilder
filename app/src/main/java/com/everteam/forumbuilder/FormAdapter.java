@@ -12,14 +12,15 @@ import java.util.List;
 
 public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
-    List<FormElement>     mFormElements;
-    TextFiledThemeConfig  textFiledThemeConfig;
-    MultiSelectThemConfig multiSelectThemConfig;
-    ButtonThemeConfig     buttonThemeConfig;
-   ButtonThemeConfig getButtonThemeConfig(){
+   List<FormElement>     mFormElements;
+   TextFiledThemeConfig  textFiledThemeConfig;
+   MultiSelectThemConfig multiSelectThemConfig;
+   ButtonThemeConfig     buttonThemeConfig;
+
+  ButtonThemeConfig getButtonThemeConfig(){
         return  buttonThemeConfig;
     }
-    MultiSelectThemConfig  getMultiSelectThemeConfig(){
+  MultiSelectThemConfig  getMultiSelectThemeConfig(){
        return  multiSelectThemConfig;
     }
   TextFiledThemeConfig  getTextFiledConfig(){
