@@ -1,5 +1,6 @@
 package com.everteam.forumbuilder;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,10 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ButtonFormObj.ButtonListener {
 
     List<FormElement> formElements = new ArrayList<>();
-
+    RecyclerView rView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +44,26 @@ public class MainActivity extends AppCompatActivity {
                         null),
                 R.layout.multiple_selection_layout));
 
-        RecyclerView rView = findViewById(R.id.recyclerView);
+        formElements.add(new FormElement(
+                SubmitButtonViewHolder.class,
+                new ButtonFormObj(
+                        10,
+                        this,
+                        "Submit"),
+                R.layout.button_layout));
+
+        rView = findViewById(R.id.recyclerView);
 
         rView.setLayoutManager( new LinearLayoutManager(this));
         rView.setAdapter(new FormAdapter(formElements));
+    }
+
+    @Override
+    public void clicked() {
+        (formElements.get(0).getBaseFormObject()).setBaseThemeConfig(new TextFiledThemeConfig.Builder().
+                setBackgoudnColor(Color.YELLOW).setTextColor(Color.WHITE).build());
+
+        ((FormAdapter)rView.getAdapter()).getButtonThemeConfig().setBackgroundColor(Color.GRAY);
+        rView.getAdapter().notifyDataSetChanged();
     }
 }

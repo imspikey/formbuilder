@@ -24,10 +24,12 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
         textFiledFormObj  =  (TextFiledFormObj)baseFormObj;
 
-        TextFiledThemeConfig config = (TextFiledThemeConfig) textFiledFormObj.getBaseThemeConfig();
+        customTextFiledThemeConfig = (TextFiledThemeConfig) textFiledFormObj.getBaseThemeConfig();
 
-        TextFiledFormObj currTextFiledFormObj;
-        if(customTextFiledThemeConfig != null)
+        TextFiledThemeConfig config;
+
+
+        if(customTextFiledThemeConfig!= null)
             config = customTextFiledThemeConfig;
         else
             config = mainTextFiledThemeConfig;
@@ -41,7 +43,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
     @Override
     void onBind(BaseFormObj baseFormObj, BaseThemeConfig customTextFiledThemeConfig) {
-        this.customTextFiledThemeConfig = (TextFiledThemeConfig)customTextFiledThemeConfig;
+        this.mainTextFiledThemeConfig = (TextFiledThemeConfig)customTextFiledThemeConfig;
         onBind(baseFormObj);
     }
 }

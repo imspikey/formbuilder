@@ -2,7 +2,7 @@ package com.everteam.forumbuilder;
 
 //todo covert to template based
 
-class BaseThemeConfig {
+class BaseThemeConfig  {
 //not used anymore
 // public static class Builder{
 //
@@ -13,7 +13,7 @@ class BaseThemeConfig {
 //
 //     }
 //
-//     public Builder setBackgoudnColor(int backGroundColor){
+//     public Builder setBackgroundColor(int backGroundColor){
 //
 //         this.mBackgroundColor = backGroundColor;
 //

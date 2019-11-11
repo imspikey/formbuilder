@@ -15,6 +15,16 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
     List<FormElement>     mFormElements;
     TextFiledThemeConfig  textFiledThemeConfig;
     MultiSelectThemConfig multiSelectThemConfig;
+    ButtonThemeConfig     buttonThemeConfig;
+   ButtonThemeConfig getButtonThemeConfig(){
+        return  buttonThemeConfig;
+    }
+    MultiSelectThemConfig  getMultiSelectThemeConfig(){
+       return  multiSelectThemConfig;
+    }
+  TextFiledThemeConfig  getTextFiledConfig(){
+       return textFiledThemeConfig;
+  }
 
     FormAdapter(List<FormElement> mFormEmFormElements){
 
@@ -25,6 +35,9 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
         textFiledThemeConfig  = new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
                 setBackgoudnColor(Color.BLACK).build();
+        buttonThemeConfig   = new ButtonThemeConfig.Builder().setTextColor(Color.BLACK)
+                .setBackgroundColor(Color.BLUE)
+                .build();
     }
 
     @NonNull
@@ -80,6 +93,9 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
         if(aFormElementViewHolder instanceof TextElementViewHolder)
         aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), textFiledThemeConfig);
+
+        if(aFormElementViewHolder instanceof SubmitButtonViewHolder)
+            aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), buttonThemeConfig);
 
         else{
             aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject());
