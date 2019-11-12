@@ -4,38 +4,52 @@ class ButtonThemeConfig extends BaseThemeConfig{
 
     public static class Builder{
 
-    private  int mTextColor;
-    private  int mBackgroundColor;
+        private  int    mTextColor;
+        private  int    mBackgroundColor;
+        private  String mFont;
 
-    public Builder setBackgroundColor(int backGroundColor){
+        public Builder setFont(String font){
+            this.mFont = font;
+            return  this;
+        }
 
-        this.mBackgroundColor = backGroundColor;
-        return this;
-    }
+        public Builder setBackgroundColor(int backGroundColor){
 
-    public Builder setTextColor(int mTextColor){
-        this.mTextColor = mTextColor;
+            this.mBackgroundColor = backGroundColor;
+            return this;
+        }
 
-        return this;
-    }
+        public Builder setTextColor(int mTextColor){
+            this.mTextColor = mTextColor;
 
-    public ButtonThemeConfig build(){
+            return this;
+        }
 
-        ButtonThemeConfig buttonThemeConfig =  new ButtonThemeConfig();
-        buttonThemeConfig.mBackgroundColor      = this.mBackgroundColor;
-        buttonThemeConfig.mTextColor            = this.mTextColor;
+        public ButtonThemeConfig build(){
 
-        return buttonThemeConfig;
-    }
+            ButtonThemeConfig buttonThemeConfig =  new ButtonThemeConfig();
+            buttonThemeConfig.mBackgroundColor      = this.mBackgroundColor;
+            buttonThemeConfig.mTextColor            = this.mTextColor;
+            buttonThemeConfig.mFont                 = this.mFont;
+            return buttonThemeConfig;
+        }
 }
 
     private  ButtonThemeConfig(){
 
     }
 
-
     private  int mTextColor;
     private  int mBackgroundColor;
+    private  String mFont;
+
+    String getFont(){
+        return  mFont != null ? mFont : "Default";
+    }
+
+    void setFont(String mFont){
+        this.mFont = mFont;
+    }
 
     int getTextColor() {
         return mTextColor;
@@ -52,5 +66,4 @@ class ButtonThemeConfig extends BaseThemeConfig{
     public void setTextColor(int textBackgroundColor) {
         this.mTextColor = textBackgroundColor;
     }
-
 }

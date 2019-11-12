@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
     @Override
     public void clicked() {
         (formElements.get(0).getBaseFormObject()).setBaseThemeConfig(new TextFiledThemeConfig.Builder().
-                setBackgoudnColor(Color.YELLOW).setTextColor(Color.WHITE).build());
+                setBackgroundColor(Color.YELLOW).setTextColor(Color.WHITE).build());
 
         ((FormAdapter)rView.getAdapter()).getButtonThemeConfig().setBackgroundColor(Color.GRAY);
         rView.getAdapter().notifyDataSetChanged();

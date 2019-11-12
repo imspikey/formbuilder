@@ -1,5 +1,6 @@
 package com.everteam.forumbuilder;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
         tv = itemView.findViewById(R.id.textView);
         et = itemView.findViewById(R.id.editText);
+
     }
 
     @Override
@@ -28,7 +30,6 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
         TextFiledThemeConfig config;
 
-
         if(customTextFiledThemeConfig!= null)
             config = customTextFiledThemeConfig;
         else
@@ -37,8 +38,21 @@ public class TextElementViewHolder extends AFormElementViewHolder {
         tv.setText(textFiledFormObj.getLabel());
         et.setText(textFiledFormObj.getValue());
 
-        et.setTextColor(config.getTextColor());
-        et.setBackgroundColor(config.getBackgroundColor());
+        tv.setTextSize(config.getLabelSize());
+        tv.setTextColor(config.getLabelColor());
+        et.setTextSize(config.getLabelSize());
+
+        try {
+
+        et.setTypeface(Typeface.createFromAsset(tv.getContext().getAssets(),
+                config.getLabelFont()));
+        tv.setTypeface(Typeface.createFromAsset(tv.getContext().getAssets(),
+                config.getTextFont()));
+        }catch (Exception ex){
+
+        }
+
+
     }
 
     @Override
