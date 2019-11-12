@@ -1,5 +1,6 @@
 package com.everteam.forumbuilder;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,16 @@ public class SubmitButtonViewHolder extends AFormElementViewHolder {
         submitButton.setText(baseFormObj.getLabel());
         submitButton.setTextColor(config.getTextColor());
         submitButton.setBackgroundColor(config.getBackgroundColor());
+        String font = config.getFont();
+
+        try {
+
+        if(font != "Default")
+        submitButton.setTypeface(Typeface.createFromAsset(submitButton.getContext().getAssets(),font));
+        }
+        catch (Exception ex){
+
+        }
 
     }
 

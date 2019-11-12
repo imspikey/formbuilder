@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class TextElementViewHolder extends AFormElementViewHolder {
 
-    TextFiledThemeConfig mainTextFiledThemeConfig,customTextFiledThemeConfig;
+    TextFiledThemeConfig mainTextFiledThemeConfig, customTextFiledThemeConfig;
     TextFiledFormObj textFiledFormObj;
     TextView tv;
     EditText et;
@@ -40,7 +40,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
         tv.setTextSize(config.getLabelSize());
         tv.setTextColor(config.getLabelColor());
-        et.setTextSize(config.getLabelSize());
+        et.setTextSize(config.getTextSize());
 
         try {
 
@@ -51,8 +51,6 @@ public class TextElementViewHolder extends AFormElementViewHolder {
         }catch (Exception ex){
 
         }
-
-
     }
 
     @Override

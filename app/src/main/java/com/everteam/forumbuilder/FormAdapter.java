@@ -17,15 +17,15 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
    MultiSelectThemConfig multiSelectThemConfig;
    ButtonThemeConfig     buttonThemeConfig;
 
-  ButtonThemeConfig getButtonThemeConfig(){
-        return  buttonThemeConfig;
+    ButtonThemeConfig getButtonThemeConfig(){
+          return  buttonThemeConfig;
+      }
+    MultiSelectThemConfig  getMultiSelectThemeConfig(){
+         return  multiSelectThemConfig;
+      }
+    TextFiledThemeConfig  getTextFiledConfig(){
+         return textFiledThemeConfig;
     }
-  MultiSelectThemConfig  getMultiSelectThemeConfig(){
-       return  multiSelectThemConfig;
-    }
-  TextFiledThemeConfig  getTextFiledConfig(){
-       return textFiledThemeConfig;
-  }
 
     FormAdapter(List<FormElement> mFormEmFormElements){
 
@@ -35,7 +35,8 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
                 setBackgoudnColor(Color.WHITE).build();
 
         textFiledThemeConfig  = new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
-                setBackgroundColor(Color.BLACK).setLableSize(12).setLableColor(Color.BLACK).setTextSize(20).build();
+                setBackgroundColor(Color.BLACK).setLableSize(12).setLableColor(Color.BLACK).setTextSize(22).build();
+
         buttonThemeConfig   = new ButtonThemeConfig.Builder().setTextColor(Color.BLACK)
                 .setBackgroundColor(Color.BLUE)
                 .build();

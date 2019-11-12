@@ -1,29 +1,27 @@
 package com.everteam.forumbuilder;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.util.SparseBooleanArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
 
     private EditText mEditText;
     private TextView mTextView;
     private MultiSelectionFormObj mMultiSelectionFormObj;
-
 
     @SuppressLint("ClickableViewAccessibility")
     public MultiSelectionFormViewHolder(@NonNull View itemView) {
@@ -41,12 +39,12 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
                     dialog.setContentView(R.layout.multiselect_dialog);
                     dialog.setCancelable(true);
 
-                    ListView listView = dialog.findViewById(R.id.listVIew);
-                    String[] names =
-                            {"Not Playing",
-                            "playing",
-                            "Still Playing",
-                            "Not Playing"};
+                    final ListView listView = dialog.findViewById(R.id.listVIew);
+                    final String[] names =
+                            {"Denmark",
+                            "Panama",
+                            "Mexico",
+                            "Yugoslavia"};
                     ListAdapter listAdapter = new ArrayAdapter<String>(listView.getContext(),
                             R.layout.list_layout,android.R.id.text1,names);
 
@@ -54,13 +52,53 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
                     listView.setChoiceMode(mMultiSelectionFormObj.isMultiSelect() ?
                             AbsListView.CHOICE_MODE_MULTIPLE : AbsListView.CHOICE_MODE_SINGLE);
 
-                    listView.setItemChecked(2, true);
+//                   int size =   mMultiSelectionFormObj.getSelectedIndexes().size();
+//
+//                    for (:
+//                         ) {
+//
+//                    }
+                    ArrayList<Integer> selectedIndexess = mMultiSelectionFormObj.getSelectedIndexes();
+
+                    if(selectedIndexess != null) {
+                        for (Integer index : selectedIndexess) {
+                            listView.setItemChecked(index, true);
+                        }
+                    }
+
 
                     FloatingActionButton doneButton = dialog.findViewById(R.id.doneButton);
 
                     doneButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
+                            SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();
+                            ;
+                            ArrayList<Integer> selectedIndexes = new ArrayList<>();
+                            mEditText.setTextSize(15);
+                            StringBuilder result = new StringBuilder();
+                            int itemCount = listView.getCount();
+                            for(int i =0; i < itemCount; i++){
+
+                                if(!checkedItemPositions.get(i))
+                                    continue;
+
+                                if(selectedIndexes.size() < 3)
+                                result.append(names[i]).append(i+1  < itemCount && mMultiSelectionFormObj.isMultiSelect() ? ", " : "");
+
+                                selectedIndexes.add(i);
+                            }
+
+                            if(checkedItemPositions.size() > 3){
+                                result.append("...");
+                                mEditText.setTextSize(12);
+                            }
+
+                            mMultiSelectionFormObj.setSelectedIndexes(selectedIndexes);
+
+                            mEditText.setText(result.toString());
+
                             dialog.dismiss();
                         }
                     });
@@ -74,7 +112,6 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
     @Override
     void onBind(BaseFormObj baseFormObj) {
         mMultiSelectionFormObj = (MultiSelectionFormObj) baseFormObj;
-
     }
 
     @Override
