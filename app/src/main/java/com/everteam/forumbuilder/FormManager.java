@@ -3,16 +3,22 @@ package com.everteam.forumbuilder;
 import android.content.Context;
 import android.util.Pair;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class FormManager implements ButtonFormObj.ButtonListener{
 
     ArrayList<FormElement> formElements;
     Context context;
+
     FormManager(ArrayList<FormElement> formElements){
         this.formElements = formElements;
     }
 
+    FormManager(String jsonElements){
+        this.formElements = createFormElements(jsonElements);
+    }
 
     Pair<Boolean, String> isFormValid(){
         Pair<Boolean, String> message = new Pair<>(true,"Under Construction");
@@ -20,8 +26,13 @@ public class FormManager implements ButtonFormObj.ButtonListener{
     }
 
 
-    void createFormElements(String jsonArrayString){
-
+    ArrayList<FormElement> createFormElements(String jsonArrayString){
+        try {
+            return JsonParser.convertToFormElementArrayList(jsonArrayString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return  null;
+        }
     }
 
     //todo ...

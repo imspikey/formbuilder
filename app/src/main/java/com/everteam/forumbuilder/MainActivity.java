@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,16 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        formElements.add(new FormElement(
+                formElements.add(new FormElement(
                 TextElementViewHolder.class,
-                new TextFiledFormObj(0, "First Text", "cool",true,null),
-                R.layout.text_element_layout));
+                new TextFiledFormObj(
+                        0,
+                        "First Text",
+                        "cool",
+                        true,
+                        null,
+                        InputType.TYPE_CLASS_TEXT),
+                        R.layout.text_element_layout));
 
         formElements.add(new FormElement(
                 MultiSelectionFormViewHolder.class,

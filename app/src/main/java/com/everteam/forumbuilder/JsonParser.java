@@ -6,9 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class JsonParser {
+ class JsonParser {
 
-    ArrayList<FormElement> convertToFormElementArrayList(String jsonString) throws JSONException {
+ public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString) throws JSONException {
 
         JSONObject jsonReader = new JSONObject(jsonString);
 
