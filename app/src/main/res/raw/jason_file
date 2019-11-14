@@ -1,0 +1,54 @@
+[
+  { "id": "full_name",
+    "type": "text",
+    "hint": "$full_name",
+    "label": "$full_name",
+    "required": true
+  },
+  { "id": "father_name",
+    "type": "text",
+    "hint": "Father name",
+    "label": "Father name",
+    "required": false
+  },
+  { "id": "identity_card",
+    "type": "text",
+    "label": "Identity card",
+    "hint": "Please enter identity card number here...",
+    "required": true,
+    "keyboardType": "number"
+  },
+  { "id": "birthdate",
+    "type": "date",
+    "label": "Birth date",
+    "dateFormat": "dd/MM/yyyy",
+    "incomingFormat": "dd-MM-yyyy"
+  },
+  { "id": "gender",
+    "type": "select",
+    "hint": "Gender",
+    "label": "Gender",
+    "required": true,
+    "selections": [
+      { "id": "1", "value": "Male" },
+      { "id": "2", "value": "Female" }]
+  },
+  { "id": "hobbies",
+    "type": "select",
+    "hint": "Hobbies",
+    "label": "Hobbies",
+    "required": false,
+    "isMulti": true,
+    "btnCancel": "cancel",
+    "btnSelection": "select",
+    "selections": [
+      { "id": "1", "value": "Basketball" },
+      { "id": "2", "value": "Football" },
+      { "id": "3", "value": "Swimming" },
+      { "id": "4", "value": "Music" }
+    ]
+  },
+  { "id": "send",
+    "type": "button",
+    "label": "Send" }
+]

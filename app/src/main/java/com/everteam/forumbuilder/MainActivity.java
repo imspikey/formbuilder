@@ -7,6 +7,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +72,33 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
 
         rView.setLayoutManager( new LinearLayoutManager(this));
         rView.setAdapter(new FormAdapter(formElements));
+
+        InputStream is = getResources().openRawResource(R.raw.jason_file);
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String jsonString = writer.toString();
+
+
+
+        FormManager formManager = new FormManager(jsonString);
     }
 
     @Override
