@@ -4,13 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
-
 import com.everteam.forumbuilder.utils.JsonParser;
 import com.everteam.forumbuilder.MainActivity;
 import com.everteam.forumbuilder.formobjects.ButtonFormObj;
-
 import org.json.JSONException;
-
 import java.util.ArrayList;
 
 public class FormManager implements ButtonFormObj.ButtonListener{

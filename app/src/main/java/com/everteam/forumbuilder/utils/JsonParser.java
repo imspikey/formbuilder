@@ -3,9 +3,11 @@ package com.everteam.forumbuilder.utils;
 import com.everteam.forumbuilder.R;
 import com.everteam.forumbuilder.form.FormElement;
 import com.everteam.forumbuilder.formobjects.ButtonFormObj;
+import com.everteam.forumbuilder.formobjects.DateFormObj;
 import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
 import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
 import com.everteam.forumbuilder.utils.KeyTypes;
+import com.everteam.forumbuilder.viewholders.DateViewHolder;
 import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
 import com.everteam.forumbuilder.viewholders.SubmitButtonViewHolder;
 import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
@@ -33,7 +35,7 @@ public class JsonParser {
             Iterator<String> keys = jsonObject.keys();
 
             String type =  jsonObject.getString("type");
-            String id, hint, label, inputType, btnCancel, btnSelection,span;
+            String id, hint, label, inputType, btnCancel, btnSelection,span,incomingFormat,dateFormat;
 
             boolean required, isMulti;
             JSONArray selectionsJOnArray;
@@ -118,6 +120,23 @@ public class JsonParser {
                         formElements.add(buttonFormElemet);
                         break;
 
+                case "date":
+
+                    id           = getStringOrDefault(jsonObject, "id", "0");
+                    label        = getStringOrDefault(jsonObject,"label", "");
+                    incomingFormat        = getStringOrDefault(jsonObject,"incomingFormat", "dd-MM-yyyy");
+                    dateFormat        = getStringOrDefault(jsonObject,"dateFormat", "dd/MM/yyyy");
+                    span = getStringOrDefault(jsonObject,"span","4");
+                    String date = getStringOrDefault(jsonObject, "time", String.valueOf(System.currentTimeMillis()));
+                    long dt = Long.valueOf("1573941600000");
+                    FormElement dateFormElement = new FormElement(
+                            DateViewHolder.class,
+                            new DateFormObj(id,label,null, dt ,dateFormat),
+                            R.layout.multiple_selection_layout,
+                            4
+                    );
+
+                    formElements.add(dateFormElement);
             }
         }
 
