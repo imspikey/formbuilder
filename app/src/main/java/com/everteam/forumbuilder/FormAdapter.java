@@ -35,7 +35,7 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
                 setBackgoudnColor(Color.WHITE).build();
 
         textFiledThemeConfig  = new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
-                setBackgroundColor(Color.BLACK).setLableSize(12).setLableColor(Color.BLACK).setTextSize(22).build();
+                setBackgroundColor(Color.BLACK).setLableSize(12).setLableColor(Color.BLACK).setTextSize(15).build();
 
         buttonThemeConfig   = new ButtonThemeConfig.Builder().setTextColor(Color.BLACK)
                 .setBackgroundColor(Color.BLUE)

@@ -5,7 +5,7 @@ public class TextFiledFormObj extends BaseFormObj {
     private boolean mIsRequired = false;
     private int mInputType;
 
-    TextFiledFormObj(int id,
+    TextFiledFormObj(String id,
                      String label,
                      boolean isRequired,
                      TextFiledThemeConfig textFiledThemeConfig,
@@ -15,7 +15,7 @@ public class TextFiledFormObj extends BaseFormObj {
         this.mInputType = inputType;
     }
 
-    TextFiledFormObj(int id,
+    TextFiledFormObj(String id,
                      String label,
                      String value,
                      boolean isRequired,

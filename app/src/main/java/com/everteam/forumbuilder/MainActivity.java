@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
 
     List<FormElement> formElements = new ArrayList<>();
     RecyclerView rView;
+    private FormManager mFormManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
                 formElements.add(new FormElement(
                 TextElementViewHolder.class,
                 new TextFiledFormObj(
-                        0,
+                        "0",
                         "First Text",
                         "cool",
                         true,
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
         formElements.add(new FormElement(
                 MultiSelectionFormViewHolder.class,
                 new MultiSelectionFormObj(
-                        0,
+                        "0",
                         "First Text",
                         true,
                         true,
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
         formElements.add(new FormElement(
                 MultiSelectionFormViewHolder.class,
                 new MultiSelectionFormObj(
-                        0,
+                        "0",
                         "Second Text",
                         true,
                         false,
@@ -63,15 +65,11 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
         formElements.add(new FormElement(
                 SubmitButtonViewHolder.class,
                 new ButtonFormObj(
-                        10,
+                        "10",
                         this,
                         "Submit"),
                 R.layout.button_layout));
 
-        rView = findViewById(R.id.recyclerView);
-
-        rView.setLayoutManager( new LinearLayoutManager(this));
-        rView.setAdapter(new FormAdapter(formElements));
 
         InputStream is = getResources().openRawResource(R.raw.jason_file);
         Writer writer = new StringWriter();
@@ -96,9 +94,9 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
 
         String jsonString = writer.toString();
 
+        rView = findViewById(R.id.recyclerView);
 
-
-        FormManager formManager = new FormManager(jsonString);
+        mFormManager = new FormManager(new LinearLayoutManager(this),this, rView ,jsonString);
     }
 
     @Override

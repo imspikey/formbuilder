@@ -40,11 +40,8 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
                     dialog.setCancelable(true);
 
                     final ListView listView = dialog.findViewById(R.id.listVIew);
-                    final String[] names =
-                            {"Denmark",
-                            "Panama",
-                            "Mexico",
-                            "Yugoslavia"};
+                    final String[] names = GetStringArray( mMultiSelectionFormObj.getSelectionValues());
+
                     ListAdapter listAdapter = new ArrayAdapter<String>(listView.getContext(),
                             R.layout.list_layout,android.R.id.text1,names);
 
@@ -108,6 +105,23 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
             }
         });
     }
+
+    public static String[] GetStringArray(ArrayList<String> arr)
+    {
+
+        // declaration and initialise String Array
+        String str[] = new String[arr.size()];
+
+        // ArrayList to Array Conversion
+        for (int j = 0; j < arr.size(); j++) {
+
+            // Assign each value to String array
+            str[j] = arr.get(j);
+        }
+
+        return str;
+    }
+
 
     @Override
     void onBind(BaseFormObj baseFormObj) {

@@ -7,19 +7,19 @@ public class ButtonFormObj extends BaseFormObj {
     }
 
     ButtonListener buttonListener;
-    ButtonFormObj(int id, ButtonListener buttonListener, String label, BaseThemeConfig baseThemeConfig) {
+    ButtonFormObj(String id, ButtonListener buttonListener, String label, BaseThemeConfig baseThemeConfig) {
         super(id, label, baseThemeConfig);
 
         this.buttonListener = buttonListener;
     }
 
-    ButtonFormObj(int id,ButtonListener buttonListener, String label) {
+    ButtonFormObj(String id,ButtonListener buttonListener, String label) {
         super(id, label);
 
         this.buttonListener = buttonListener;
     }
 
-    ButtonFormObj(int id, ButtonListener buttonListener, String label, String value,
+    ButtonFormObj(String id, ButtonListener buttonListener, String label, String value,
                   BaseThemeConfig mBaseThemeConfig) {
         super(id, label, value, mBaseThemeConfig);
         this.buttonListener =buttonListener;

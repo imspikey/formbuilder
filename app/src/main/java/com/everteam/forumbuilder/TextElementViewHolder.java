@@ -35,8 +35,8 @@ public class TextElementViewHolder extends AFormElementViewHolder {
         else
             config = mainTextFiledThemeConfig;
 
-        tv.setText(textFiledFormObj.getLabel());
-        et.setText(textFiledFormObj.getValue());
+        tv.setText(textFiledFormObj.getLabel().replace("$",""));
+        et.setHint(textFiledFormObj.getValue().replace("$",""));
 
         tv.setTextSize(config.getLabelSize());
         tv.setTextColor(config.getLabelColor());

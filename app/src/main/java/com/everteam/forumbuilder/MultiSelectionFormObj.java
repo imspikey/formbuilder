@@ -11,7 +11,7 @@ public class MultiSelectionFormObj extends BaseFormObj {
     private ArrayList<String> mSelectionValues;
     private ArrayList<Integer> mSelectedIndexes = new ArrayList<>();
 
-    MultiSelectionFormObj(int id, String label, boolean isRequired, boolean mIsMultiSelect,
+    MultiSelectionFormObj(String id, String label, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes) {
         super(id, label);
         this.mIsRequired = isRequired;
@@ -20,7 +20,7 @@ public class MultiSelectionFormObj extends BaseFormObj {
         this.mSelectedIndexes = mSelectedIndexes;
     }
 
-    MultiSelectionFormObj(int id, String label, boolean isRequired, boolean mIsMultiSelect,
+    MultiSelectionFormObj(String id, String label, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes, MultiSelectThemConfig multiSelectThemConfig) {
         super(id, label,multiSelectThemConfig);
         this.mIsRequired = isRequired;
@@ -29,7 +29,7 @@ public class MultiSelectionFormObj extends BaseFormObj {
         this.mSelectedIndexes = mSelectedIndexes;
     }
 
-    MultiSelectionFormObj(int id, String label, String value, boolean isRequired, boolean mIsMultiSelect,
+    MultiSelectionFormObj(String id, String label, String value, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes, MultiSelectThemConfig multiSelectThemConfig) {
         super(id, label, value, multiSelectThemConfig);
 

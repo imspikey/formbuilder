@@ -1,7 +1,12 @@
 package com.everteam.forumbuilder;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import org.json.JSONException;
 
@@ -9,15 +14,29 @@ import java.util.ArrayList;
 
 public class FormManager implements ButtonFormObj.ButtonListener{
 
+    private  RecyclerView recyclerView;
+
+    private RecyclerView.LayoutManager layoutManager;
     ArrayList<FormElement> formElements;
     Context context;
 
-    FormManager(ArrayList<FormElement> formElements){
+    FormManager(RecyclerView.LayoutManager layoutManager,Context mainActivity,ArrayList<FormElement> formElements){
         this.formElements = formElements;
+        this.context = mainActivity;
+        this.layoutManager = layoutManager;
     }
 
-    FormManager(String jsonElements){
-        this.formElements = createFormElements(jsonElements);
+    FormManager(RecyclerView.LayoutManager layoutManager, MainActivity mainActivity, RecyclerView recyclerView, String jsonElements){
+        this.formElements  = createFormElements(jsonElements);
+        this.context       = mainActivity;
+        this.layoutManager = layoutManager;
+        this.recyclerView  = recyclerView;
+        createForm();
+    }
+
+    private void createForm() {
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new FormAdapter(formElements));
     }
 
     Pair<Boolean, String> isFormValid(){
