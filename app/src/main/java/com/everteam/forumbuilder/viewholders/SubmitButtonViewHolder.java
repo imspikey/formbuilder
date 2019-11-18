@@ -1,15 +1,21 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.viewholders;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 
+import com.everteam.forumbuilder.formobjects.BaseFormObj;
+import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
+import com.everteam.forumbuilder.formobjects.ButtonFormObj;
+import com.everteam.forumbuilder.themeconfigs.ButtonThemeConfig;
+import com.everteam.forumbuilder.R;
+
 public class SubmitButtonViewHolder extends AFormElementViewHolder {
 
     Button submitButton;
     ButtonFormObj buttonFormObj;
-    ButtonThemeConfig  mainButtonThemeConfig, customButtonThemeConfig;
+    ButtonThemeConfig mainButtonThemeConfig, customButtonThemeConfig;
 
     public SubmitButtonViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -23,7 +29,7 @@ public class SubmitButtonViewHolder extends AFormElementViewHolder {
     }
 
     @Override
-    void onBind(BaseFormObj baseFormObj) {
+  public void onBind(BaseFormObj baseFormObj) {
 
         ButtonThemeConfig config;
         buttonFormObj = (ButtonFormObj) baseFormObj;
@@ -55,7 +61,7 @@ public class SubmitButtonViewHolder extends AFormElementViewHolder {
     }
 
     @Override
-    void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
+    public void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
 
         this.customButtonThemeConfig = (ButtonThemeConfig) baseThemeConfig;
 

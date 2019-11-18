@@ -1,10 +1,16 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.viewholders;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.everteam.forumbuilder.formobjects.BaseFormObj;
+import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
+import com.everteam.forumbuilder.R;
+import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
+import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 
 public class TextElementViewHolder extends AFormElementViewHolder {
 
@@ -22,7 +28,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
     }
 
     @Override
-    void onBind(BaseFormObj baseFormObj) {
+    public void onBind(BaseFormObj baseFormObj) {
 
         textFiledFormObj  =  (TextFiledFormObj)baseFormObj;
 
@@ -54,7 +60,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
     }
 
     @Override
-    void onBind(BaseFormObj baseFormObj, BaseThemeConfig customTextFiledThemeConfig) {
+    public void onBind(BaseFormObj baseFormObj, BaseThemeConfig customTextFiledThemeConfig) {
         this.mainTextFiledThemeConfig = (TextFiledThemeConfig)customTextFiledThemeConfig;
         onBind(baseFormObj);
     }

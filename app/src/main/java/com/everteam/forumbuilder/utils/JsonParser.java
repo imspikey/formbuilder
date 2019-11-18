@@ -1,6 +1,14 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.utils;
 
+import com.everteam.forumbuilder.R;
+import com.everteam.forumbuilder.form.FormElement;
+import com.everteam.forumbuilder.formobjects.ButtonFormObj;
+import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
+import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
 import com.everteam.forumbuilder.utils.KeyTypes;
+import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
+import com.everteam.forumbuilder.viewholders.SubmitButtonViewHolder;
+import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,9 +16,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class JsonParser {
+public class JsonParser {
 
- public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString) throws JSONException {
+ public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString, ButtonFormObj.ButtonListener buttonListener) throws JSONException {
 
      JSONArray jsonArray = new JSONArray(jsonString);
 
@@ -25,7 +33,8 @@ class JsonParser {
             Iterator<String> keys = jsonObject.keys();
 
             String type =  jsonObject.getString("type");
-            String id, hint, label, inputType, btnCancel, btnSelection;
+            String id, hint, label, inputType, btnCancel, btnSelection,span;
+
             boolean required, isMulti;
             JSONArray selectionsJOnArray;
             switch (type){
@@ -35,6 +44,7 @@ class JsonParser {
                      label     = getStringOrDefault(jsonObject,"label", "");
                      required = getBooleanOrDefault(jsonObject,"required");
                      inputType = getStringOrDefault(jsonObject,"keyboardType", "");
+                     span = getStringOrDefault(jsonObject,"span","4");
 
                     FormElement formElement = new FormElement(
                             TextElementViewHolder.class,
@@ -46,7 +56,8 @@ class JsonParser {
                                     null,
                                     KeyTypes.getKeyType(inputType)
                                     ),
-                            R.layout.text_element_layout
+                            R.layout.text_element_layout,
+                            Integer.parseInt(span)
                     );
 
                     formElements.add(formElement);
@@ -62,6 +73,7 @@ class JsonParser {
                          btnCancel    = getStringOrDefault(jsonObject,"btnCancel", "cancel");
                          btnSelection = getStringOrDefault(jsonObject,"btnSelection", "select");
                          selectionsJOnArray   = jsonObject.getJSONArray("selections");
+                         span = getStringOrDefault(jsonObject,"span","4");
 
                         ArrayList<String> selectionValues = new ArrayList<>();
 
@@ -84,20 +96,26 @@ class JsonParser {
                                         null
 
                                 ),
-                                R.layout.multiple_selection_layout
+                                R.layout.multiple_selection_layout,
+                                Integer.parseInt(span)
                         );
 
                         formElements.add(multiSelectFormElement);
 
                         break;
-                    case "button"
+                case "button":
                         id           = getStringOrDefault(jsonObject, "id", "0");
                         label        = getStringOrDefault(jsonObject,"label", "");
+                        span = getStringOrDefault(jsonObject,"span","4");
 
                         FormElement buttonFormElemet = new FormElement(
                                 SubmitButtonViewHolder.class,
-                                new ButtonFormObj()
-                        )
+                                new ButtonFormObj(id, buttonListener, label,"a", null),
+                                R.layout.button_layout,
+                                Integer.parseInt(span)
+                        );
+
+                        formElements.add(buttonFormElemet);
                         break;
 
             }

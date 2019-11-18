@@ -1,8 +1,8 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.themeconfigs;
 
 import android.graphics.Color;
 
-class TextFiledThemeConfig extends BaseThemeConfig {
+public class TextFiledThemeConfig extends BaseThemeConfig {
 
     public static class Builder{
 
@@ -45,17 +45,17 @@ class TextFiledThemeConfig extends BaseThemeConfig {
             return this;
         }
 
-         Builder setBackgroundColor(int backGroundColor){
+        public  Builder setBackgroundColor(int backGroundColor){
             this.mBackgroundColor = backGroundColor;
             return this;
         }
 
-         Builder setTextColor(int mTextColor){
+        public  Builder setTextColor(int mTextColor){
             this.mTextColor = mTextColor;
             return this;
         }
 
-         TextFiledThemeConfig build(){
+        public TextFiledThemeConfig build(){
 
             TextFiledThemeConfig textFiledThemeConfig  = new TextFiledThemeConfig();
             textFiledThemeConfig.mBackgroundColor      = this.mBackgroundColor;
@@ -80,11 +80,11 @@ class TextFiledThemeConfig extends BaseThemeConfig {
     private  int    mLabelColor;
     private  String mLabelFont;
 
-     int getTextSize() {
+    public int getTextSize() {
         return mTextSize > 0 ? mTextSize : 20;
     }
 
-     String getTextFont() {
+    public String getTextFont() {
         return mTextFont != null ? mTextFont : "Default";
     }
 
@@ -92,15 +92,15 @@ class TextFiledThemeConfig extends BaseThemeConfig {
         return mLabelText != null ? mLabelText : "";
     }
 
-     int getLabelSize() {
+    public int getLabelSize() {
         return mLabelSize > 0 ? mLabelSize : 12 ;
     }
 
-     int getLabelColor() {
+    public int getLabelColor() {
         return mLabelColor != 0 ? Color.BLACK : mLabelColor;
     }
 
-     String getLabelFont() {
+    public String getLabelFont() {
         return mLabelFont != null ? mLabelFont : "Default";
     }
 

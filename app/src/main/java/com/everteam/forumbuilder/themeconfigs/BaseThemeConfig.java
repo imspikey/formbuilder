@@ -1,8 +1,8 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.themeconfigs;
 
 //todo covert to template based
 
-class BaseThemeConfig  {
+public class BaseThemeConfig  {
 //not used anymore
 // public static class Builder{
 //

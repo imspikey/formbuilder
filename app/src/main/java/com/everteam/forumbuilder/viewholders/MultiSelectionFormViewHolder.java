@@ -1,4 +1,4 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.viewholders;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -8,12 +8,16 @@ import android.util.SparseBooleanArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.everteam.forumbuilder.formobjects.BaseFormObj;
+import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
+import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
+import com.everteam.forumbuilder.R;
 
 import java.util.ArrayList;
 
@@ -124,12 +128,12 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
 
 
     @Override
-    void onBind(BaseFormObj baseFormObj) {
+  public void onBind(BaseFormObj baseFormObj) {
         mMultiSelectionFormObj = (MultiSelectionFormObj) baseFormObj;
     }
 
     @Override
-    void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
+    public void onBind(BaseFormObj baseFormObj, BaseThemeConfig baseThemeConfig) {
 
     }
 }

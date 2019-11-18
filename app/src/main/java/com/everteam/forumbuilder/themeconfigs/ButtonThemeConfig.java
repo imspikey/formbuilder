@@ -1,6 +1,6 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.themeconfigs;
 
-class ButtonThemeConfig extends BaseThemeConfig{
+public class ButtonThemeConfig extends BaseThemeConfig {
 
     public static class Builder{
 
@@ -43,7 +43,7 @@ class ButtonThemeConfig extends BaseThemeConfig{
     private  int mBackgroundColor;
     private  String mFont;
 
-    String getFont(){
+    public String getFont(){
         return  mFont != null ? mFont : "Default";
     }
 
@@ -51,7 +51,7 @@ class ButtonThemeConfig extends BaseThemeConfig{
         this.mFont = mFont;
     }
 
-    int getTextColor() {
+    public int getTextColor() {
         return mTextColor;
     }
 

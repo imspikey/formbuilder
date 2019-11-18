@@ -1,12 +1,13 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.form;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.everteam.forumbuilder.utils.JsonParser;
+import com.everteam.forumbuilder.MainActivity;
+import com.everteam.forumbuilder.formobjects.ButtonFormObj;
 
 import org.json.JSONException;
 
@@ -20,13 +21,13 @@ public class FormManager implements ButtonFormObj.ButtonListener{
     ArrayList<FormElement> formElements;
     Context context;
 
-    FormManager(RecyclerView.LayoutManager layoutManager,Context mainActivity,ArrayList<FormElement> formElements){
+    public FormManager(RecyclerView.LayoutManager layoutManager,Context mainActivity,ArrayList<FormElement> formElements){
         this.formElements = formElements;
         this.context = mainActivity;
         this.layoutManager = layoutManager;
     }
 
-    FormManager(RecyclerView.LayoutManager layoutManager, MainActivity mainActivity, RecyclerView recyclerView, String jsonElements){
+    public FormManager(RecyclerView.LayoutManager layoutManager, MainActivity mainActivity, RecyclerView recyclerView, String jsonElements){
         this.formElements  = createFormElements(jsonElements);
         this.context       = mainActivity;
         this.layoutManager = layoutManager;
@@ -35,6 +36,13 @@ public class FormManager implements ButtonFormObj.ButtonListener{
     }
 
     private void createForm() {
+
+        ((GridLayoutManager)layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int i) {
+                return  formElements.get(i).getSpan();
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new FormAdapter(formElements));
     }
@@ -47,7 +55,7 @@ public class FormManager implements ButtonFormObj.ButtonListener{
 
     ArrayList<FormElement> createFormElements(String jsonArrayString){
         try {
-            return JsonParser.convertToFormElementArrayList(jsonArrayString);
+            return JsonParser.convertToFormElementArrayList(jsonArrayString,this);
         } catch (JSONException e) {
             e.printStackTrace();
             return  null;

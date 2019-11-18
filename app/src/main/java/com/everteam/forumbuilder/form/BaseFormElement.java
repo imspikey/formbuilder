@@ -1,4 +1,4 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.form;
 
 import android.support.annotation.LayoutRes;
 
@@ -7,10 +7,10 @@ public class BaseFormElement {
     @LayoutRes
     private int layoutId;
 
-    BaseFormElement(@LayoutRes int layoutId){
+    public BaseFormElement(@LayoutRes int layoutId){
         this.layoutId = layoutId;
     }
-     int getLayout() {
+     public int getLayout() {
         return layoutId;
     }
 }

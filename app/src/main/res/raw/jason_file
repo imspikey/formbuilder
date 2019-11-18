@@ -3,20 +3,23 @@
     "type": "text",
     "hint": "$full_name",
     "label": "$full_name",
-    "required": true
+    "required": true,
+    "span":2
   },
   { "id": "father_name",
     "type": "text",
     "hint": "Father name",
     "label": "Father name",
-    "required": false
+    "required": false,
+    "span":2
   },
   { "id": "identity_card",
     "type": "text",
     "label": "Identity card",
     "hint": "Please enter identity card number here...",
     "required": true,
-    "keyboardType": "number"
+    "keyboardType": "number",
+    "span":4
   },
   { "id": "birthdate",
     "type": "date",
@@ -31,7 +34,8 @@
     "required": true,
     "selections": [
       { "id": "1", "value": "Male" },
-      { "id": "2", "value": "Female" }]
+      { "id": "2", "value": "Female" }],
+      "span":2
   },
   { "id": "hobbies",
     "type": "select",
@@ -46,9 +50,12 @@
       { "id": "2", "value": "Football" },
       { "id": "3", "value": "Swimming" },
       { "id": "4", "value": "Music" }
-    ]
+    ],
+    "span":4
   },
   { "id": "send",
     "type": "button",
-    "label": "Send" }
+    "label": "Send",
+    "span":4
+  }
 ]

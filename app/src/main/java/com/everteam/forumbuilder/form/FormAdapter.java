@@ -1,4 +1,4 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.form;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -6,6 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.everteam.forumbuilder.themeconfigs.ButtonThemeConfig;
+import com.everteam.forumbuilder.themeconfigs.MultiSelectThemConfig;
+import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
+import com.everteam.forumbuilder.viewholders.AFormElementViewHolder;
+import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
+import com.everteam.forumbuilder.viewholders.SubmitButtonViewHolder;
+import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -13,9 +22,9 @@ import java.util.List;
 public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
    List<FormElement>     mFormElements;
-   TextFiledThemeConfig  textFiledThemeConfig;
+   TextFiledThemeConfig textFiledThemeConfig;
    MultiSelectThemConfig multiSelectThemConfig;
-   ButtonThemeConfig     buttonThemeConfig;
+   ButtonThemeConfig buttonThemeConfig;
 
     ButtonThemeConfig getButtonThemeConfig(){
           return  buttonThemeConfig;

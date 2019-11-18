@@ -1,6 +1,6 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.themeconfigs;
 
-class MultiSelectThemConfig  extends BaseThemeConfig{
+public class MultiSelectThemConfig  extends BaseThemeConfig {
 
     public static class Builder{
 

@@ -1,13 +1,14 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.form;
 
-import android.support.annotation.LayoutRes;
+import com.everteam.forumbuilder.formobjects.BaseFormObj;
+import com.everteam.forumbuilder.viewholders.AFormElementViewHolder;
 
-public class FormElement<A extends AFormElementViewHolder >
+public class FormElement<A extends AFormElementViewHolder>
         extends BaseFormElement
 {
   private Class<?> mFormElementViewHolder;
   private BaseFormObj mBaseFormObject;
-
+  private int span;
 //  FormElement(@LayoutRes int layoutId){
 //        super(layoutId);
 //    }
@@ -21,19 +22,28 @@ public class FormElement<A extends AFormElementViewHolder >
 //        this.mBaseFormObject = BaseFormObj;
 //    }
         //
-     FormElement( Class<AFormElementViewHolder> mFormElementViewHolder ,BaseFormObj mBaseFormObject, int layoutId) {
+public FormElement( Class<AFormElementViewHolder> mFormElementViewHolder ,BaseFormObj mBaseFormObject, int layoutId, int span) {
         super(layoutId);
         this.mBaseFormObject = mBaseFormObject;
         this.mFormElementViewHolder = mFormElementViewHolder;
+        this.span = span;
     }
 
-     Class<?> getFormElementViewHolder()
+
+    public Class<?> getFormElementViewHolder()
    {
        return mFormElementViewHolder;
    }
+    public int getSpan()
+    {
+        return  span;
+    }
 
+     void setSpan(int span) {
+        this.span = span;
+    }
 
-   BaseFormObj getBaseFormObject() {
+    public BaseFormObj getBaseFormObject() {
         return mBaseFormObject;
     }
 }

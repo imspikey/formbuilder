@@ -1,11 +1,13 @@
-package com.everteam.forumbuilder;
+package com.everteam.forumbuilder.formobjects;
+
+import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 
 public class TextFiledFormObj extends BaseFormObj {
 
     private boolean mIsRequired = false;
     private int mInputType;
 
-    TextFiledFormObj(String id,
+    public TextFiledFormObj(String id,
                      String label,
                      boolean isRequired,
                      TextFiledThemeConfig textFiledThemeConfig,
@@ -15,7 +17,7 @@ public class TextFiledFormObj extends BaseFormObj {
         this.mInputType = inputType;
     }
 
-    TextFiledFormObj(String id,
+   public TextFiledFormObj(String id,
                      String label,
                      String value,
                      boolean isRequired,

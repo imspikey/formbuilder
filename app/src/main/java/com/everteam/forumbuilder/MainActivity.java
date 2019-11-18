@@ -1,11 +1,13 @@
 package com.everteam.forumbuilder;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
+
+import com.everteam.forumbuilder.form.FormElement;
+import com.everteam.forumbuilder.form.FormManager;
+import com.everteam.forumbuilder.formobjects.ButtonFormObj;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,46 +31,46 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-                formElements.add(new FormElement(
-                TextElementViewHolder.class,
-                new TextFiledFormObj(
-                        "0",
-                        "First Text",
-                        "cool",
-                        true,
-                        null,
-                        InputType.TYPE_CLASS_TEXT),
-                        R.layout.text_element_layout));
-
-        formElements.add(new FormElement(
-                MultiSelectionFormViewHolder.class,
-                new MultiSelectionFormObj(
-                        "0",
-                        "First Text",
-                        true,
-                        true,
-                        null,
-                        null),
-                R.layout.multiple_selection_layout));
-        
-        formElements.add(new FormElement(
-                MultiSelectionFormViewHolder.class,
-                new MultiSelectionFormObj(
-                        "0",
-                        "Second Text",
-                        true,
-                        false,
-                        null,
-                        null),
-                R.layout.multiple_selection_layout));
-
-        formElements.add(new FormElement(
-                SubmitButtonViewHolder.class,
-                new ButtonFormObj(
-                        "10",
-                        this,
-                        "Submit"),
-                R.layout.button_layout));
+//                formElements.add(new FormElement(
+//                TextElementViewHolder.class,
+//                new TextFiledFormObj(
+//                        "0",
+//                        "First Text",
+//                        "cool",
+//                        true,
+//                        null,
+//                        InputType.TYPE_CLASS_TEXT),
+//                        R.layout.text_element_layout));
+//
+//        formElements.add(new FormElement(
+//                MultiSelectionFormViewHolder.class,
+//                new MultiSelectionFormObj(
+//                        "0",
+//                        "First Text",
+//                        true,
+//                        true,
+//                        null,
+//                        null),
+//                R.layout.multiple_selection_layout));
+//
+//        formElements.add(new FormElement(
+//                MultiSelectionFormViewHolder.class,
+//                new MultiSelectionFormObj(
+//                        "0",
+//                        "Second Text",
+//                        true,
+//                        false,
+//                        null,
+//                        null),
+//                R.layout.multiple_selection_layout));
+//
+//        formElements.add(new FormElement(
+//                SubmitButtonViewHolder.class,
+//                new ButtonFormObj(
+//                        "10",
+//                        this,
+//                        "Submit"),
+//                R.layout.button_layout));
 
 
         InputStream is = getResources().openRawResource(R.raw.jason_file);
@@ -96,15 +98,15 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
 
         rView = findViewById(R.id.recyclerView);
 
-        mFormManager = new FormManager(new LinearLayoutManager(this),this, rView ,jsonString);
+        mFormManager = new FormManager(new GridLayoutManager(this, 4),this, rView ,jsonString);
     }
 
     @Override
     public void clicked() {
-        (formElements.get(0).getBaseFormObject()).setBaseThemeConfig(new TextFiledThemeConfig.Builder().
-                setBackgroundColor(Color.YELLOW).setTextColor(Color.WHITE).build());
-
-        ((FormAdapter)rView.getAdapter()).getButtonThemeConfig().setBackgroundColor(Color.GRAY);
-        rView.getAdapter().notifyDataSetChanged();
+//        (formElements.get(0).getBaseFormObject()).setBaseThemeConfig(new TextFiledThemeConfig.Builder().
+//                setBackgroundColor(Color.YELLOW).setTextColor(Color.WHITE).build());
+//
+//        ((FormAdapter)rView.getAdapter()).getButtonThemeConfig().setBackgroundColor(Color.GRAY);
+//        rView.getAdapter().notifyDataSetChanged();
     }
 }
