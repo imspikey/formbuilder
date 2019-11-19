@@ -15,7 +15,11 @@ import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public class JsonParser {
@@ -35,7 +39,8 @@ public class JsonParser {
             Iterator<String> keys = jsonObject.keys();
 
             String type =  jsonObject.getString("type");
-            String id, hint, label, inputType, btnCancel, btnSelection,span,incomingFormat,dateFormat;
+            String id, hint, label, inputType, btnCancel, btnSelection,
+                    span,incomingFormat,dateFormat,timeFormat,date;
 
             boolean required, isMulti;
             JSONArray selectionsJOnArray;
@@ -122,18 +127,20 @@ public class JsonParser {
 
                 case "date":
 
-                    id           = getStringOrDefault(jsonObject, "id", "0");
-                    label        = getStringOrDefault(jsonObject,"label", "");
-                    incomingFormat        = getStringOrDefault(jsonObject,"incomingFormat", "dd-MM-yyyy");
-                    dateFormat        = getStringOrDefault(jsonObject,"dateFormat", "dd/MM/yyyy");
-                    span = getStringOrDefault(jsonObject,"span","4");
-                    String date = getStringOrDefault(jsonObject, "time", String.valueOf(System.currentTimeMillis()));
-                    long dt = Long.valueOf("1573941600000");
+                    id             = getStringOrDefault(jsonObject, "id", "0");
+                    label          = getStringOrDefault(jsonObject,"label", "");
+                    incomingFormat = getStringOrDefault(jsonObject,"incomingFormat", "dd-MM-yyyy");
+                    dateFormat     = getStringOrDefault(jsonObject,"dateFormat", "");
+                    timeFormat     = getStringOrDefault(jsonObject,"dateFormat", "");
+                    span           = getStringOrDefault(jsonObject,"span","4");
+                    date           = getStringOrDefault(jsonObject, "date", ""/*String.valueOf(System.currentTimeMillis())*/);
+
+
                     FormElement dateFormElement = new FormElement(
                             DateViewHolder.class,
-                            new DateFormObj(id,label,null, dt ,dateFormat),
+                            new DateFormObj(id,label,null, date ,dateFormat, timeFormat, incomingFormat),
                             R.layout.multiple_selection_layout,
-                            4
+                            Integer.parseInt(span)
                     );
 
                     formElements.add(dateFormElement);

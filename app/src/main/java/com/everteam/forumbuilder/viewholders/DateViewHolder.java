@@ -1,12 +1,14 @@
 package com.everteam.forumbuilder.viewholders;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.everteam.forumbuilder.R;
 import com.everteam.forumbuilder.formobjects.BaseFormObj;
@@ -22,6 +24,7 @@ public class DateViewHolder extends AFormElementViewHolder {
     DateThemeConfig customThemConfig, mainThemeConfig;
     TextView textView;
     EditText editText;
+    boolean isDateOnly, isTimeOnly, isDateAndTime;
     public DateViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -31,23 +34,57 @@ public class DateViewHolder extends AFormElementViewHolder {
         editText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                final Calendar myCalendar = Calendar.getInstance();
-                myCalendar.setTimeInMillis(0);
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    new DatePickerDialog(textView.getContext(), new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
-                        }
-                    },
-                            myCalendar.get(Calendar.YEAR),
-                            myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.MINUTE)).show();
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
+
+                    if(dateFormObj.getDateType() == DateFormObj.DateType.DATETIME || dateFormObj.getDateType() == DateFormObj.DateType.DATE)
+                            showDatePicker();
                 }
                 return true;
             }
         });
 
+    }
+
+    void showDatePicker(){
+
+        final Calendar myCalendar = Calendar.getInstance();
+        myCalendar.setTimeInMillis(0);
+
+        new DatePickerDialog(textView.getContext(), new OnDateSetListener(),
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.MINUTE)).show();
+    }
+
+    void showTimePicker(){
+
+        new TimePickerDialog(
+                textView.getContext(),
+                new OnTimeSetListener(),
+                0,
+                0,
+                true).show();
+    }
+
+    class  OnTimeSetListener implements   TimePickerDialog.OnTimeSetListener{
+
+        @Override
+        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+            if(dateFormObj.getDateType() == DateFormObj.DateType.DATETIME){
+
+            }
+        }
+    }
+
+    class OnDateSetListener implements  DatePickerDialog.OnDateSetListener{
+
+        @Override
+        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+            showTimePicker();
+        }
     }
 
     @Override

@@ -21,6 +21,15 @@
     "keyboardType": "number",
     "span":4
   },
+  {
+  "id": "license_start",
+  "type": "date",
+  "label": "License Start Date",
+  "date": "28-10-2019 06:05",
+  "dateFormat": "dd/MM/yyyy",
+  "timeFormat": "hh:mm",
+  "incomingFormat": "dd-MM-yyyy hh:mm"
+  },
   { "id": "birthdate",
     "type": "date",
     "label": "Birth date",
