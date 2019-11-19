@@ -9,14 +9,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import com.everteam.forumbuilder.R;
 import com.everteam.forumbuilder.formobjects.BaseFormObj;
 import com.everteam.forumbuilder.formobjects.DateFormObj;
 import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
 import com.everteam.forumbuilder.themeconfigs.DateThemeConfig;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateViewHolder extends AFormElementViewHolder {
 
@@ -40,6 +41,9 @@ public class DateViewHolder extends AFormElementViewHolder {
 
                     if(dateFormObj.getDateType() == DateFormObj.DateType.DATETIME || dateFormObj.getDateType() == DateFormObj.DateType.DATE)
                             showDatePicker();
+                    else{
+                        showTimePicker();
+                    }
                 }
                 return true;
             }
@@ -49,22 +53,45 @@ public class DateViewHolder extends AFormElementViewHolder {
 
     void showDatePicker(){
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getIncomingFormat());
+
+        Date date = null;
+        try{
+             date = simpleDateFormat.parse(dateFormObj.getDate());
+        }
+        catch (Exception ex){
+
+        }
         final Calendar myCalendar = Calendar.getInstance();
-        myCalendar.setTimeInMillis(0);
+        myCalendar.setTime(date);
+
 
         new DatePickerDialog(textView.getContext(), new OnDateSetListener(),
                 myCalendar.get(Calendar.YEAR),
                 myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.MINUTE)).show();
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     void showTimePicker(){
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getIncomingFormat());
+
+        Date date = null;
+        try{
+            date = simpleDateFormat.parse(dateFormObj.getDate());
+        }
+        catch (Exception ex){
+
+        }
+        final Calendar myCalendar = Calendar.getInstance();
+        myCalendar.setTime(date);
+
+
         new TimePickerDialog(
                 textView.getContext(),
                 new OnTimeSetListener(),
-                0,
-                0,
+                myCalendar.get(Calendar.HOUR_OF_DAY),
+                myCalendar.get(Calendar.MINUTE),
                 true).show();
     }
 
