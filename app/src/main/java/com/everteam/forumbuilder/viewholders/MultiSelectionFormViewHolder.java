@@ -110,6 +110,13 @@ public class MultiSelectionFormViewHolder extends AFormElementViewHolder {
         });
     }
 
+    @Override
+    public boolean isElementValid() {
+        mMultiSelectionFormObj.ismIsRequired()
+
+        return false;
+    }
+
     public static String[] GetStringArray(ArrayList<String> arr)
     {
 

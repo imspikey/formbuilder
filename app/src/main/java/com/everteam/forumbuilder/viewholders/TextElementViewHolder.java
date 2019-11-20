@@ -14,6 +14,8 @@ import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 
 public class TextElementViewHolder extends AFormElementViewHolder {
 
+    enum position {Top,BOTTOM,Right}
+
     TextFiledThemeConfig mainTextFiledThemeConfig, customTextFiledThemeConfig;
     TextFiledFormObj textFiledFormObj;
     TextView tv;
@@ -63,5 +65,11 @@ public class TextElementViewHolder extends AFormElementViewHolder {
     public void onBind(BaseFormObj baseFormObj, BaseThemeConfig customTextFiledThemeConfig) {
         this.mainTextFiledThemeConfig = (TextFiledThemeConfig)customTextFiledThemeConfig;
         onBind(baseFormObj);
+    }
+
+
+    public boolean isElementValid(){
+
+        return     et.getText().length() > 0;
     }
 }
