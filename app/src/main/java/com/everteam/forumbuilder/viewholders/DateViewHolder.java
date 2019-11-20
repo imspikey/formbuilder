@@ -14,10 +14,11 @@ import com.everteam.forumbuilder.formobjects.BaseFormObj;
 import com.everteam.forumbuilder.formobjects.DateFormObj;
 import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
 import com.everteam.forumbuilder.themeconfigs.DateThemeConfig;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.everteam.forumbuilder.formobjects.DateFormObj.DateType.*;
 
 public class DateViewHolder extends AFormElementViewHolder {
 
@@ -25,7 +26,17 @@ public class DateViewHolder extends AFormElementViewHolder {
     DateThemeConfig customThemConfig, mainThemeConfig;
     TextView textView;
     EditText editText;
-    boolean isDateOnly, isTimeOnly, isDateAndTime;
+    boolean isDateOnly,
+            isTimeOnly,
+            isDateAndTime;
+    private int year;
+    private int month;
+    private int day;
+    private int hour;
+    private int minut;
+    private String date ="";
+    private String time ="";
+
     public DateViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -38,8 +49,7 @@ public class DateViewHolder extends AFormElementViewHolder {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
-
-                    if(dateFormObj.getDateType() == DateFormObj.DateType.DATETIME || dateFormObj.getDateType() == DateFormObj.DateType.DATE)
+                    if(dateFormObj.getDateType() == DATETIME || dateFormObj.getDateType() == DATE)
                             showDatePicker();
                     else{
                         showTimePicker();
@@ -53,18 +63,33 @@ public class DateViewHolder extends AFormElementViewHolder {
 
     void showDatePicker(){
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getIncomingFormat());
+        String dateStr = dateFormObj.getDate();
 
         Date date = null;
-        try{
-             date = simpleDateFormat.parse(dateFormObj.getDate());
-        }
-        catch (Exception ex){
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getIncomingFormat());
+            try {
+
+
+        if(!this.date.equals(""))
+        {
+            simpleDateFormat = new SimpleDateFormat(dateFormObj.getDateFormat());
+            date = simpleDateFormat.parse(this.date);
         }
+        else if(dateStr.equals("")){
+            date = Calendar.getInstance().getTime();
+         }
+
+    else {
+                date = simpleDateFormat.parse(dateFormObj.getDate());
+         }
+    }
+    catch (Exception ex) {
+
+    }
+
         final Calendar myCalendar = Calendar.getInstance();
         myCalendar.setTime(date);
-
 
         new DatePickerDialog(textView.getContext(), new OnDateSetListener(),
                 myCalendar.get(Calendar.YEAR),
@@ -74,15 +99,28 @@ public class DateViewHolder extends AFormElementViewHolder {
 
     void showTimePicker(){
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getIncomingFormat());
+        String dateStr = dateFormObj.getDate();
 
         Date date = null;
-        try{
-            date = simpleDateFormat.parse(dateFormObj.getDate());
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormObj.getIncomingFormat());
+        try {
+            if(!this.time.equals(""))
+            {
+            simpleDateFormat = new SimpleDateFormat(dateFormObj.getTimeFormat());
+            date = simpleDateFormat.parse(this.time);
+            }
+
+            else if(dateStr.equals("")) {
+                date = Calendar.getInstance().getTime();
+            } else {
+                date = simpleDateFormat.parse(dateFormObj.getDate());
+            }
         }
-        catch (Exception ex){
+        catch (Exception ex) {
 
         }
+
         final Calendar myCalendar = Calendar.getInstance();
         myCalendar.setTime(date);
 
@@ -98,20 +136,66 @@ public class DateViewHolder extends AFormElementViewHolder {
     class  OnTimeSetListener implements   TimePickerDialog.OnTimeSetListener{
 
         @Override
-        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
 
-            if(dateFormObj.getDateType() == DateFormObj.DateType.DATETIME){
+            hour  = hourOfDay;
+            minut = minute;
+
+            if(dateFormObj.getDateType() == TIME){
+                setTimeText(false);
+
+            }
+            else
+            {
+                setDateText();
+                setTimeText(true);
 
             }
         }
     }
 
+
     class OnDateSetListener implements  DatePickerDialog.OnDateSetListener{
 
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+            year  = datePicker.getYear();
+            month = datePicker.getMonth();
+            day   = datePicker.getDayOfMonth();
+
+            if(dateFormObj.getDateType() == DATE)
+            {
+                setDateText();
+                return;
+            }
+
             showTimePicker();
         }
+    }
+
+    private void setDateText() {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getDateFormat());
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day);
+
+        date = simpleDateFormat.format(cal.getTime());
+
+        editText.setText(date);
+    }
+
+
+    private void setTimeText(boolean additive) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormObj.getTimeFormat());
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, minut);
+
+        time = simpleDateFormat.format(cal.getTime());
+
+        editText.setText(additive ? editText.getText()+" "+ time : time);
     }
 
     @Override
@@ -131,9 +215,7 @@ public class DateViewHolder extends AFormElementViewHolder {
             config = customThemConfig;
         }
 
-
         textView.setText(dateFormObj.getLabel());
-
     }
 
     @Override

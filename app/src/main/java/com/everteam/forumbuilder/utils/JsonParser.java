@@ -131,7 +131,7 @@ public class JsonParser {
                     label          = getStringOrDefault(jsonObject,"label", "");
                     incomingFormat = getStringOrDefault(jsonObject,"incomingFormat", "dd-MM-yyyy");
                     dateFormat     = getStringOrDefault(jsonObject,"dateFormat", "");
-                    timeFormat     = getStringOrDefault(jsonObject,"dateFormat", "");
+                    timeFormat     = getStringOrDefault(jsonObject,"timeFormat", "");
                     span           = getStringOrDefault(jsonObject,"span","4");
                     date           = getStringOrDefault(jsonObject, "date", ""/*String.valueOf(System.currentTimeMillis())*/);
 

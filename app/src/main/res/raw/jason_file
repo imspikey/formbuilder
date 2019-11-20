@@ -30,6 +30,14 @@
   "timeFormat": "hh:mm",
   "incomingFormat": "dd-MM-yyyy hh:mm"
   },
+  {
+    "id": "license_start",
+    "type": "date",
+    "label": "Time Format",
+    "date": "28-10-2019 06:05",
+    "timeFormat": "hh:mm",
+    "incomingFormat": "dd-MM-yyyy hh:mm"
+  },
   { "id": "birthdate",
     "type": "date",
     "label": "Birth date",
