@@ -91,7 +91,7 @@ public class TextElementViewHolder extends AFormElementViewHolder {
             tvTop.setText(textFiledFormObj.getLabel().replace("$", ""));
             tvTop.setTextSize(config.getLabelSize());
             tvTop.setTextColor(config.getLabelColor());
-            tvstatus.setVisibility(View.GONE);
+            tv.setVisibility(View.GONE);
         }
 
 
