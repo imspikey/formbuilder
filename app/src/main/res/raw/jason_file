@@ -3,6 +3,7 @@
     "type": "text",
     "hint": "$full_name",
     "label": "$full_name",
+    "position": "top",
     "required": true,
     "span":2
   },

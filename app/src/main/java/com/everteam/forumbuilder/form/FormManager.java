@@ -83,17 +83,29 @@ public class FormManager implements ButtonFormObj.ButtonListener{
                 }
             BaseFormObj formObject = element.getBaseFormObject();
 
-                Map<String, Object> elementObjects = new HashMap<>();
+                Map<String, Object> elementsMap = new HashMap<>();
+
+                elementsMap.put("id", formObject.getId());
 
                 if(formObject instanceof TextFiledFormObj)
                 {
+                    TextFiledFormObj texFiled = (TextFiledFormObj) formObject;
+                    elementsMap.put("text",texFiled.getText());
 
                 } else if(formObject instanceof MultiSelectionFormObj) {
+
+                    MultiSelectionFormObj multiSelectionFiled = (MultiSelectionFormObj) formObject;
+
+                    if(multiSelectionFiled.isMultiSelect())
+                    elementsMap.put("multi",multiSelectionFiled.getSelectedIndexes());
+                    else
+                    elementsMap.put("selection",multiSelectionFiled.getSelectedIndexes().get(0));
 
                 } else if(formObject instanceof DateFormObj){
 
                 }
 
+                formData.put(formObject.getId(), elementsMap);
         }
 
 

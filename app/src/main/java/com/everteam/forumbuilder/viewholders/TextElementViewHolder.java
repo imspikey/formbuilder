@@ -2,6 +2,8 @@ package com.everteam.forumbuilder.viewholders;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,14 +20,50 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
     TextFiledThemeConfig mainTextFiledThemeConfig, customTextFiledThemeConfig;
     TextFiledFormObj textFiledFormObj;
-    TextView tv;
+    TextView tv,tvTop;
     EditText et;
 
     public TextElementViewHolder(@NonNull View itemView) {
         super(itemView);
 
         tv = itemView.findViewById(R.id.textView);
+        tvTop = itemView.findViewById(R.id.textViewTop);
         et = itemView.findViewById(R.id.editText);
+
+
+        tvTop.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                textFiledFormObj.setText(s.toString());
+            }
+        });
+
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                textFiledFormObj.setText(s.toString());
+            }
+        });
 
     }
 
@@ -43,11 +81,22 @@ public class TextElementViewHolder extends AFormElementViewHolder {
         else
             config = mainTextFiledThemeConfig;
 
-        tv.setText(textFiledFormObj.getLabel().replace("$",""));
+        if(textFiledFormObj.getPosition() == TextFiledFormObj.Position.TOP) {
+            tv.setText(textFiledFormObj.getLabel().replace("$", ""));
+            tv.setTextSize(config.getLabelSize());
+            tv.setTextColor(config.getLabelColor());
+            tvTop.setVisibility(View.GONE);
+        }
+        else{
+            tvTop.setText(textFiledFormObj.getLabel().replace("$", ""));
+            tvTop.setTextSize(config.getLabelSize());
+            tvTop.setTextColor(config.getLabelColor());
+            tvstatus.setVisibility(View.GONE);
+        }
+
+
         et.setHint(textFiledFormObj.getValue().replace("$",""));
 
-        tv.setTextSize(config.getLabelSize());
-        tv.setTextColor(config.getLabelColor());
         et.setTextSize(config.getTextSize());
 
         try {

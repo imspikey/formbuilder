@@ -39,8 +39,9 @@ public class JsonParser {
             Iterator<String> keys = jsonObject.keys();
 
             String type =  jsonObject.getString("type");
-            String id, hint, label, inputType, btnCancel, btnSelection,
-                    span,incomingFormat,dateFormat,timeFormat,date;
+            String id, hint, label, inputType,
+                    btnCancel, btnSelection,span,incomingFormat,
+                    dateFormat,timeFormat,date, position;
 
             boolean required, isMulti;
             JSONArray selectionsJOnArray;
@@ -49,6 +50,7 @@ public class JsonParser {
                      id        = getStringOrDefault(jsonObject, "id", "0");
                      hint      = getStringOrDefault(jsonObject,"hint","");
                      label     = getStringOrDefault(jsonObject,"label", "");
+                     position  = getStringOrDefault(jsonObject,"position", "Left");
                      required = getBooleanOrDefault(jsonObject,"required", false);
                      inputType = getStringOrDefault(jsonObject,"keyboardType", "");
                      span = getStringOrDefault(jsonObject,"span","4");
@@ -61,7 +63,8 @@ public class JsonParser {
                                     hint,
                                     required,
                                     null,
-                                    KeyTypes.getKeyType(inputType)
+                                    KeyTypes.getKeyType(inputType),
+                                    position
                                     ),
                             R.layout.text_element_layout,
                             Integer.parseInt(span)
