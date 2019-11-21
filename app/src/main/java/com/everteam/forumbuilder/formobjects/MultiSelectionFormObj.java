@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class MultiSelectionFormObj extends BaseFormObj {
 
-    private boolean mIsRequired = false;
     private boolean mIsMultiSelect;
 
     private ArrayList<String> mSelectionValues;
@@ -16,7 +15,6 @@ public class MultiSelectionFormObj extends BaseFormObj {
     public MultiSelectionFormObj(String id, String label, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes) {
         super(id, label);
-        this.mIsRequired = isRequired;
         this.mIsMultiSelect = mIsMultiSelect;
         this.mSelectionValues = selectionValues;
         this.mSelectedIndexes = mSelectedIndexes;
@@ -24,8 +22,7 @@ public class MultiSelectionFormObj extends BaseFormObj {
 
     public  MultiSelectionFormObj(String id, String label, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes, MultiSelectThemConfig multiSelectThemConfig) {
-        super(id, label,multiSelectThemConfig);
-        this.mIsRequired = isRequired;
+        super(id, label,multiSelectThemConfig, isRequired);
         this.mIsMultiSelect = mIsMultiSelect;
         this.mSelectionValues = selectionValues;
         this.mSelectedIndexes = mSelectedIndexes;
@@ -33,16 +30,11 @@ public class MultiSelectionFormObj extends BaseFormObj {
 
     public MultiSelectionFormObj(String id, String label, String value, boolean isRequired, boolean mIsMultiSelect,
                           ArrayList<String> selectionValues, ArrayList<Integer> mSelectedIndexes, MultiSelectThemConfig multiSelectThemConfig) {
-        super(id, label, value, multiSelectThemConfig);
+        super(id, label, value, multiSelectThemConfig,isRequired);
 
-        this.mIsRequired = isRequired;
         this.mIsMultiSelect = mIsMultiSelect;
         this.mSelectionValues = selectionValues;
         this.mSelectedIndexes = mSelectedIndexes;
-    }
-
-    public boolean ismIsRequired() {
-        return mIsRequired;
     }
 
     public boolean isMultiSelect() {

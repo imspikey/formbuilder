@@ -61,7 +61,7 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
                  viewGroup,
                  false);
 
-        String className = formElement.getFormElementViewHolder().getName();
+        String className = formElement.getmFormElementViewHolderInstance().getName();
         Class<?>  c = null;
         try {
             c = Class.forName(className);
@@ -79,7 +79,9 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 //            else{
 //                v = cons.newInstance(view);
 //            }
-            return  (AFormElementViewHolder) v;
+            AFormElementViewHolder fAVH = (AFormElementViewHolder) v;
+            formElement.setFormElementViewHolder(fAVH);
+            return  fAVH;
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

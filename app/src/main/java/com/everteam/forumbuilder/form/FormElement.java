@@ -6,33 +6,42 @@ import com.everteam.forumbuilder.viewholders.AFormElementViewHolder;
 public class FormElement<A extends AFormElementViewHolder>
         extends BaseFormElement
 {
-  private Class<?> mFormElementViewHolder;
+  private Class<?> mFormElementViewHolderInstance;
   private BaseFormObj mBaseFormObject;
   private int span;
+  AFormElementViewHolder aFormElementViewHolder;
+
 //  FormElement(@LayoutRes int layoutId){
 //        super(layoutId);
 //    }
 
 
-//  FormElement( Class<A> mFormElementViewHolder, H BaseFormObj, @LayoutRes int layoutId){
+//  FormElement( Class<A> mFormElementViewHolderInstance, H BaseFormObj, @LayoutRes int layoutId){
 //
 //        super(layoutId);
 //
-//        this.mFormElementViewHolder = mFormElementViewHolder;
+//        this.mFormElementViewHolderInstance = mFormElementViewHolderInstance;
 //        this.mBaseFormObject = BaseFormObj;
 //    }
         //
+
 public FormElement( Class<AFormElementViewHolder> mFormElementViewHolder ,BaseFormObj mBaseFormObject, int layoutId, int span) {
         super(layoutId);
         this.mBaseFormObject = mBaseFormObject;
-        this.mFormElementViewHolder = mFormElementViewHolder;
+        this.mFormElementViewHolderInstance = mFormElementViewHolder;
         this.span = span;
     }
 
-
-    public Class<?> getFormElementViewHolder()
+    public Class<?> getmFormElementViewHolderInstance(){
+    return mFormElementViewHolderInstance;
+    }
+    public AFormElementViewHolder getFormElementViewHolder()
    {
-       return mFormElementViewHolder;
+       return aFormElementViewHolder;
+   }
+
+   public void setFormElementViewHolder(AFormElementViewHolder aFormElementViewHolder){
+    this.aFormElementViewHolder = aFormElementViewHolder;
    }
     public int getSpan()
     {

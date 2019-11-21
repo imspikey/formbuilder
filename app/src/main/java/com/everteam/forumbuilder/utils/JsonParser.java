@@ -49,7 +49,7 @@ public class JsonParser {
                      id        = getStringOrDefault(jsonObject, "id", "0");
                      hint      = getStringOrDefault(jsonObject,"hint","");
                      label     = getStringOrDefault(jsonObject,"label", "");
-                     required = getBooleanOrDefault(jsonObject,"required");
+                     required = getBooleanOrDefault(jsonObject,"required", false);
                      inputType = getStringOrDefault(jsonObject,"keyboardType", "");
                      span = getStringOrDefault(jsonObject,"span","4");
 
@@ -75,8 +75,8 @@ public class JsonParser {
                          id           = getStringOrDefault(jsonObject, "id", "0");
                          hint         = getStringOrDefault(jsonObject,"hint","");
                          label        = getStringOrDefault(jsonObject,"label", "");
-                         required     = getBooleanOrDefault(jsonObject,"required");
-                         isMulti      = getBooleanOrDefault(jsonObject,"isMulti");
+                         required     = getBooleanOrDefault(jsonObject,"required", false);
+                         isMulti      = getBooleanOrDefault(jsonObject,"isMulti", false);
                          btnCancel    = getStringOrDefault(jsonObject,"btnCancel", "cancel");
                          btnSelection = getStringOrDefault(jsonObject,"btnSelection", "select");
                          selectionsJOnArray   = jsonObject.getJSONArray("selections");
@@ -134,11 +134,12 @@ public class JsonParser {
                     timeFormat     = getStringOrDefault(jsonObject,"timeFormat", "");
                     span           = getStringOrDefault(jsonObject,"span","4");
                     date           = getStringOrDefault(jsonObject, "date", ""/*String.valueOf(System.currentTimeMillis())*/);
+                    required           = getBooleanOrDefault(jsonObject, "required", false);
 
 
                     FormElement dateFormElement = new FormElement(
                             DateViewHolder.class,
-                            new DateFormObj(id,label,null, date ,dateFormat, timeFormat, incomingFormat),
+                            new DateFormObj(id,label,null, date ,dateFormat, timeFormat, incomingFormat, required),
                             R.layout.multiple_selection_layout,
                             Integer.parseInt(span)
                     );
@@ -159,13 +160,13 @@ public class JsonParser {
         }
     }
 
-    private static boolean getBooleanOrDefault(JSONObject jsonObject, String key) {
+    private static boolean getBooleanOrDefault(JSONObject jsonObject, String key, boolean def) {
 
         try {
           return   jsonObject.getBoolean(key);
         } catch (JSONException e) {
 
-            return false;
+            return def;
         }
     }
 }

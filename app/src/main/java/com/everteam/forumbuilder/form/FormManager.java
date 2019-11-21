@@ -4,16 +4,24 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
+
+import com.everteam.forumbuilder.formobjects.BaseFormObj;
+import com.everteam.forumbuilder.formobjects.DateFormObj;
+import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
+import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
 import com.everteam.forumbuilder.utils.JsonParser;
 import com.everteam.forumbuilder.MainActivity;
 import com.everteam.forumbuilder.formobjects.ButtonFormObj;
 import org.json.JSONException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormManager implements ButtonFormObj.ButtonListener{
 
     private  RecyclerView recyclerView;
-
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<FormElement> formElements;
     Context context;
@@ -49,7 +57,6 @@ public class FormManager implements ButtonFormObj.ButtonListener{
         return message;
     }
 
-
     ArrayList<FormElement> createFormElements(String jsonArrayString){
         try {
             return JsonParser.convertToFormElementArrayList(jsonArrayString,this);
@@ -62,6 +69,37 @@ public class FormManager implements ButtonFormObj.ButtonListener{
     //todo ...
     @Override
     public void clicked() {
+
+        boolean isFormValid = true;
+
+        Map<String, Map<String, Object>> formData = new HashMap<>();
+        for(int i = 0; i < formElements.size(); i++){
+            FormElement element = formElements.get(i);
+
+                if(!element.getFormElementViewHolder().isElementValid())
+                {
+                        isFormValid = false;
+                        break;
+                }
+            BaseFormObj formObject = element.getBaseFormObject();
+
+                Map<String, Object> elementObjects = new HashMap<>();
+
+                if(formObject instanceof TextFiledFormObj)
+                {
+
+                } else if(formObject instanceof MultiSelectionFormObj) {
+
+                } else if(formObject instanceof DateFormObj){
+
+                }
+
+        }
+
+
         ((ButtonFormObj.ButtonListener) context).clicked();
+
+
+
     }
 }

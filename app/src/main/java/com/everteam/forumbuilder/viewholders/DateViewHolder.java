@@ -61,6 +61,22 @@ public class DateViewHolder extends AFormElementViewHolder {
 
     }
 
+    @Override
+    public boolean isElementValid() {
+
+        if(dateFormObj.getIsRequierd())
+        {
+            if(dateFormObj.getDateType() == DATETIME)
+                return  !date.equals("") && !time.equals("");
+            else if(dateFormObj.getDateType() == DATE)
+                return  !date.equals("");
+            else
+                return !time.equals("");
+        }
+
+        return true;
+    }
+
     void showDatePicker(){
 
         String dateStr = dateFormObj.getDate();

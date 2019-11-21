@@ -9,8 +9,9 @@ public class ButtonFormObj extends BaseFormObj {
     }
 
     ButtonListener buttonListener;
+
     public ButtonFormObj(String id, ButtonListener buttonListener, String label, BaseThemeConfig baseThemeConfig) {
-        super(id, label, baseThemeConfig);
+        super(id, label, baseThemeConfig, false);
 
         this.buttonListener = buttonListener;
     }
@@ -23,8 +24,9 @@ public class ButtonFormObj extends BaseFormObj {
 
     public ButtonFormObj(String id, ButtonListener buttonListener, String label, String value,
                   BaseThemeConfig mBaseThemeConfig) {
-        super(id, label, value, mBaseThemeConfig);
-        this.buttonListener =buttonListener;
+        super(id, label, value, mBaseThemeConfig, false);
+
+        this.buttonListener = buttonListener;
     }
 
     public ButtonListener getOnCLickListener(){

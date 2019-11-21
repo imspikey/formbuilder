@@ -10,13 +10,14 @@ public abstract  class BaseFormObj {
     private String mLabel;
     private String mValue;
     private BaseThemeConfig mBaseThemeConfig;
-
+    private  boolean isRequierd;
     Function<Boolean, String> validationAddon =  null;
 
-   public BaseFormObj(String id, String label,BaseThemeConfig baseThemeConfig){
+   public BaseFormObj(String id, String label,BaseThemeConfig baseThemeConfig , boolean isRequired){
         this.mId = id;
         this.mLabel = label;
         this.mBaseThemeConfig = baseThemeConfig;
+        this.isRequierd = isRequired;
     }
 
 
@@ -25,11 +26,12 @@ public abstract  class BaseFormObj {
         this.mLabel = label;
     }
 
-    public BaseFormObj(String id, String label, String value,BaseThemeConfig mBaseThemeConfig ){
+    public BaseFormObj(String id, String label, String value,BaseThemeConfig mBaseThemeConfig, boolean isRequierd ){
         this.mId = id;
         this.mLabel = label;
         this.mValue = value;
         this.mBaseThemeConfig = mBaseThemeConfig;
+        this.isRequierd = isRequierd;
     }
 
     public String getLabel() {
@@ -42,6 +44,10 @@ public abstract  class BaseFormObj {
 
     public String getId() {
         return mId;
+    }
+
+    public  boolean getIsRequierd(){
+       return isRequierd;
     }
 
     public BaseThemeConfig getBaseThemeConfig() {

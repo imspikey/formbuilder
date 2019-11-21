@@ -47,8 +47,8 @@ public class DateFormObj extends  BaseFormObj {
     private String dateFormat;
 
     public DateFormObj(String id, String label, BaseThemeConfig baseThemeConfig,
-                       String date, String format, String timeFormat, String incomingFormat) {
-        super(id, label, baseThemeConfig);
+                       String date, String format, String timeFormat, String incomingFormat, boolean requierd) {
+        super(id, label, baseThemeConfig, requierd);
 
         this.date = date;
         this.dateFormat = format;
@@ -71,8 +71,8 @@ public class DateFormObj extends  BaseFormObj {
         this.dateFormat = format;
     }
 
-    public DateFormObj(String id, String label, String value, BaseThemeConfig mBaseThemeConfig) {
-        super(id, label, value, mBaseThemeConfig);
+    public DateFormObj(String id, String label, String value, BaseThemeConfig mBaseThemeConfig, boolean required) {
+        super(id, label, value, mBaseThemeConfig, required);
     }
 
     public String getDate() {

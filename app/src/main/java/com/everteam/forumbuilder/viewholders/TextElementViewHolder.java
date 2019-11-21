@@ -70,6 +70,9 @@ public class TextElementViewHolder extends AFormElementViewHolder {
 
     public boolean isElementValid(){
 
-        return     et.getText().length() > 0;
+        if(textFiledFormObj.getIsRequierd())
+        return  et.getText().length() > 0;
+
+        return  true;
     }
 }

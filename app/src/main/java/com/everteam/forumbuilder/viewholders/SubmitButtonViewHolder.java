@@ -29,6 +29,11 @@ public class SubmitButtonViewHolder extends AFormElementViewHolder {
     }
 
     @Override
+    public boolean isElementValid() {
+        return true;
+    }
+
+    @Override
   public void onBind(BaseFormObj baseFormObj) {
 
         ButtonThemeConfig config;

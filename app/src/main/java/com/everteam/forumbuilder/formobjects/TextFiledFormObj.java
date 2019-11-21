@@ -4,7 +4,6 @@ import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 
 public class TextFiledFormObj extends BaseFormObj {
 
-    private boolean mIsRequired = false;
     private int mInputType;
 
     public TextFiledFormObj(String id,
@@ -12,8 +11,8 @@ public class TextFiledFormObj extends BaseFormObj {
                      boolean isRequired,
                      TextFiledThemeConfig textFiledThemeConfig,
                      int inputType) {
-        super(id, label, textFiledThemeConfig);
-        this.mIsRequired = isRequired;
+        super(id, label, textFiledThemeConfig, isRequired);
+
         this.mInputType = inputType;
     }
 
@@ -23,13 +22,8 @@ public class TextFiledFormObj extends BaseFormObj {
                      boolean isRequired,
                      TextFiledThemeConfig textFiledThemeConfig,
                      int inputType) {
-        super(id, label, value, textFiledThemeConfig);
-        this.mIsRequired = isRequired;
+        super(id, label, value, textFiledThemeConfig, isRequired);
         this.mInputType = inputType;
-    }
-
-    public boolean ismIsRequired() {
-        return mIsRequired;
     }
 
     public int getInputType() {
@@ -39,4 +33,5 @@ public class TextFiledFormObj extends BaseFormObj {
     public void setInputType(int inputType) {
         this.mInputType = inputType;
     }
+
 }
