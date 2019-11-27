@@ -11,22 +11,25 @@ import com.everteam.forumbuilder.viewholders.DateViewHolder;
 import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
 import com.everteam.forumbuilder.viewholders.SubmitButtonViewHolder;
 import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 public class JsonParser {
 
- public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString, ButtonFormObj.ButtonListener buttonListener) throws JSONException {
+ public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString,
+                                                                    ButtonFormObj.ButtonListener buttonListener,
+                                                                    int layoutSpanCount) throws JSONException {
 
-     JSONArray jsonArray = new JSONArray(jsonString);
+     JSONObject formJsonObject = new JSONObject(jsonString);
+
+     JSONObject styles = formJsonObject .getJSONObject("styles");
+
+     JSONArray jsonArray = formJsonObject.getJSONArray("elements");
 
      ArrayList<FormElement>  formElements = new ArrayList<>();
 
@@ -51,9 +54,10 @@ public class JsonParser {
                      hint      = getStringOrDefault(jsonObject,"hint","");
                      label     = getStringOrDefault(jsonObject,"label", "");
                      position  = getStringOrDefault(jsonObject,"position", "Left");
-                     required = getBooleanOrDefault(jsonObject,"required", false);
+                     required  = getBooleanOrDefault(jsonObject,"required", false);
                      inputType = getStringOrDefault(jsonObject,"keyboardType", "");
-                     span = getStringOrDefault(jsonObject,"span","4");
+                     span           = getStringOrDefault(jsonObject,"widthMultiplier","1");
+                     span = (int)( layoutSpanCount * Float.parseFloat(span)) + "";
 
                     FormElement formElement = new FormElement(
                             TextElementViewHolder.class,
@@ -83,7 +87,8 @@ public class JsonParser {
                          btnCancel    = getStringOrDefault(jsonObject,"btnCancel", "cancel");
                          btnSelection = getStringOrDefault(jsonObject,"btnSelection", "select");
                          selectionsJOnArray   = jsonObject.getJSONArray("selections");
-                         span = getStringOrDefault(jsonObject,"span","4");
+                         span           = getStringOrDefault(jsonObject,"widthMultiplier","1");
+                         span = (int)( layoutSpanCount * Float.parseFloat(span)) + "";
 
                         ArrayList<String> selectionValues = new ArrayList<>();
 
@@ -116,7 +121,8 @@ public class JsonParser {
                 case "button":
                         id           = getStringOrDefault(jsonObject, "id", "0");
                         label        = getStringOrDefault(jsonObject,"label", "");
-                        span = getStringOrDefault(jsonObject,"span","4");
+                        span           = getStringOrDefault(jsonObject,"widthMultiplier","1");
+                        span = (int)( layoutSpanCount * Float.parseFloat(span)) + "";
 
                         FormElement buttonFormElemet = new FormElement(
                                 SubmitButtonViewHolder.class,
@@ -135,10 +141,10 @@ public class JsonParser {
                     incomingFormat = getStringOrDefault(jsonObject,"incomingFormat", "dd-MM-yyyy");
                     dateFormat     = getStringOrDefault(jsonObject,"dateFormat", "");
                     timeFormat     = getStringOrDefault(jsonObject,"timeFormat", "");
-                    span           = getStringOrDefault(jsonObject,"span","4");
                     date           = getStringOrDefault(jsonObject, "date", ""/*String.valueOf(System.currentTimeMillis())*/);
-                    required           = getBooleanOrDefault(jsonObject, "required", false);
-
+                    required       = getBooleanOrDefault(jsonObject, "required", false);
+                    span           = getStringOrDefault(jsonObject,"widthMultiplier","1");
+                    span           = (int)( layoutSpanCount * Float.parseFloat(span)) + "";
 
                     FormElement dateFormElement = new FormElement(
                             DateViewHolder.class,

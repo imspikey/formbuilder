@@ -1,79 +1,110 @@
-[
-  { "id": "full_name",
-    "type": "text",
-    "hint": "$full_name",
-    "label": "$full_name",
-    "position": "top",
-    "required": true,
-    "span":2
+{
+  "styles": {
+    "textFieldsStyle": {
+      "labelColor": "#3949ab",
+      "textFieldTextColor": "#00227b",
+      "border": "rectangle"
+    },
+    "dateFieldsStyle": {
+      "dateColor": "#00227b",
+      "labelColor": "#3949ab"
+    },
+    "buttonsStyle": {
+      "textColor": "#FFFFFF",
+      "backgroundColor": "#3949ab"
+    }
   },
-  { "id": "father_name",
-    "type": "text",
-    "hint": "Father name",
-    "label": "Father name",
-    "required": false,
-    "span":2
-  },
-  { "id": "identity_card",
-    "type": "text",
-    "label": "Identity card",
-    "hint": "Please enter identity card number here...",
-    "required": true,
-    "keyboardType": "number",
-    "span":4
-  },
-  {
-  "id": "license_start",
-  "type": "date",
-  "label": "License Start Date",
-  "date": "28-10-2019 06:05",
-  "dateFormat": "dd/MM/yyyy",
-  "timeFormat": "hh:mm",
-  "incomingFormat": "dd-MM-yyyy hh:mm"
-  },
-  {
-    "id": "license_start",
-    "type": "date",
-    "label": "Time Format",
-    "date": "28-10-2019 06:05",
-    "timeFormat": "hh:mm",
-    "incomingFormat": "dd-MM-yyyy hh:mm"
-  },
-  { "id": "birthdate",
-    "type": "date",
-    "label": "Birth date",
-    "dateFormat": "dd/MM/yyyy",
-    "incomingFormat": "dd-MM-yyyy"
-  },
-  { "id": "gender",
-    "type": "select",
-    "hint": "Gender",
-    "label": "Gender",
-    "required": true,
-    "selections": [
-      { "id": "1", "value": "Male" },
-      { "id": "2", "value": "Female" }],
-      "span":2
-  },
-  { "id": "hobbies",
-    "type": "select",
-    "hint": "Hobbies",
-    "label": "Hobbies",
-    "required": false,
-    "isMulti": true,
-    "btnCancel": "cancel",
-    "btnSelection": "select",
-    "selections": [
-      { "id": "1", "value": "Basketball" },
-      { "id": "2", "value": "Football" },
-      { "id": "3", "value": "Swimming" },
-      { "id": "4", "value": "Music" }
-    ],
-    "span":4
-  },
-  { "id": "send",
-    "type": "button",
-    "label": "Send",
-    "span":4
-  }
-]
+  "elements": [
+    {
+      "id": "full_name",
+      "type": "text",
+      "hint": "$full_name",
+      "label": "$full_name",
+      "required": true,
+      "mode": "labelTop"
+    },
+    {
+      "id": "father_name",
+      "type": "text",
+      "hint": "Father name",
+      "label": "Father name",
+      "required": false
+    },
+    {
+      "id": "identity_card",
+      "type": "text",
+      "label": "Identity card",
+      "hint": "Enter identity card number here...",
+      "required": true,
+      "keyboardType": "number"
+    },
+    {
+      "id": "license_start",
+      "type": "date",
+      "label": "License Start Date",
+      "dateFormat": "dd/MM/yyyy",
+      "incomingFormat": "dd-MM-yyyy"
+    },
+    {
+      "id": "license_end",
+      "type": "date",
+      "label": "License End Date",
+      "dateFormat": "dd/MM/yyyy",
+      "incomingFormat": "dd-MM-yyyy"
+    },
+    {
+      "id": "gender",
+      "type": "select",
+      "hint": "Gender",
+      "label": "Gender",
+      "required": true,
+      "mode": "labelTop",
+      "widthMultiplier": 0.5,
+      "selections": [
+        {
+          "id": "1",
+          "value": "Male"
+        },
+        {
+          "id": "2",
+          "value": "Female"
+        }
+      ]
+    },
+    {
+      "id": "hobbies",
+      "type": "select",
+      "hint": "Hobbies",
+      "label": "Hobbies",
+      "required": false,
+      "isMulti": true,
+      "btnCancel": "Cancel",
+      "btnSelection": "Select",
+      "mode": "labelTop",
+      "widthMultiplier": 0.5,
+      "selections": [
+        {
+          "id": "1",
+          "value": "Basketball"
+        },
+        {
+          "id": "2",
+          "value": "Football"
+        },
+        {
+          "id": "3",
+          "value": "Swimming"
+        },
+        {
+          "id": "4",
+          "value": "Music"
+        }
+      ]
+    },
+    {
+      "id": "send",
+      "type": "button",
+      "label": "Send"
+    }
+  ]
+}

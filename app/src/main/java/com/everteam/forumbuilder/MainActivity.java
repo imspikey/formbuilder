@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements ButtonFormObj.But
 
         rView = findViewById(R.id.recyclerView);
 
-        mFormManager = new FormManager(new GridLayoutManager(this, 4),this, rView ,jsonString);
+        mFormManager = new FormManager(new GridLayoutManager(this, 10),this, rView ,jsonString);
     }
 
     @Override

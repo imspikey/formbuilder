@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
-
 import com.everteam.forumbuilder.formobjects.BaseFormObj;
 import com.everteam.forumbuilder.formobjects.DateFormObj;
 import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
@@ -13,7 +12,6 @@ import com.everteam.forumbuilder.utils.JsonParser;
 import com.everteam.forumbuilder.MainActivity;
 import com.everteam.forumbuilder.formobjects.ButtonFormObj;
 import org.json.JSONException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +30,12 @@ public class FormManager implements ButtonFormObj.ButtonListener{
         this.layoutManager = layoutManager;
     }
 
-    public FormManager(RecyclerView.LayoutManager layoutManager, MainActivity mainActivity, RecyclerView recyclerView, String jsonElements){
-        this.formElements  = createFormElements(jsonElements);
+    public FormManager(RecyclerView.LayoutManager layoutManager, MainActivity mainActivity,
+                       RecyclerView recyclerView, String jsonElements){
+
+       int spanCount = layoutManager instanceof GridLayoutManager ? ((GridLayoutManager)layoutManager).getSpanCount() : 1;
+
+        this.formElements  = createFormElements(jsonElements,spanCount);
         this.context       = mainActivity;
         this.layoutManager = layoutManager;
         this.recyclerView  = recyclerView;
@@ -45,7 +47,7 @@ public class FormManager implements ButtonFormObj.ButtonListener{
         ((GridLayoutManager)layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int i) {
-                return  formElements.get(i).getSpan();
+                return   formElements.get(i).getSpan();
             }
         });
         recyclerView.setLayoutManager(layoutManager);
@@ -57,9 +59,9 @@ public class FormManager implements ButtonFormObj.ButtonListener{
         return message;
     }
 
-    ArrayList<FormElement> createFormElements(String jsonArrayString){
+    ArrayList<FormElement> createFormElements(String jsonArrayString, int layoutSpanCount){
         try {
-            return JsonParser.convertToFormElementArrayList(jsonArrayString,this);
+            return JsonParser.convertToFormElementArrayList(jsonArrayString,this, layoutSpanCount);
         } catch (JSONException e) {
             e.printStackTrace();
             return  null;
@@ -108,10 +110,6 @@ public class FormManager implements ButtonFormObj.ButtonListener{
                 formData.put(formObject.getId(), elementsMap);
         }
 
-
         ((ButtonFormObj.ButtonListener) context).clicked();
-
-
-
     }
 }

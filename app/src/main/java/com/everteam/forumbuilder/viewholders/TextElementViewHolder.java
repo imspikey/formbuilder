@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.everteam.forumbuilder.formobjects.BaseFormObj;
 import com.everteam.forumbuilder.themeconfigs.BaseThemeConfig;
 import com.everteam.forumbuilder.R;
