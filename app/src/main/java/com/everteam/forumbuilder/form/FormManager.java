@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import com.everteam.forumbuilder.formobjects.BaseFormObj;
 import com.everteam.forumbuilder.formobjects.DateFormObj;
+import com.everteam.forumbuilder.formobjects.FormJasonObjectsContainer;
 import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
 import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
 import com.everteam.forumbuilder.utils.JsonParser;
@@ -19,8 +20,9 @@ import java.util.Map;
 
 public class FormManager implements ButtonFormObj.ButtonListener{
 
+    private  FormJasonObjectsContainer formJasonObjectsContainer;
     private  RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+    private  RecyclerView.LayoutManager layoutManager;
     ArrayList<FormElement> formElements;
     Context context;
 
@@ -34,8 +36,8 @@ public class FormManager implements ButtonFormObj.ButtonListener{
                        RecyclerView recyclerView, String jsonElements){
 
        int spanCount = layoutManager instanceof GridLayoutManager ? ((GridLayoutManager)layoutManager).getSpanCount() : 1;
-
-        this.formElements  = createFormElements(jsonElements,spanCount);
+        this.formJasonObjectsContainer  = createFormElements(jsonElements,spanCount);
+        this.formElements = formJasonObjectsContainer.getFormElements();
         this.context       = mainActivity;
         this.layoutManager = layoutManager;
         this.recyclerView  = recyclerView;
@@ -51,7 +53,8 @@ public class FormManager implements ButtonFormObj.ButtonListener{
             }
         });
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new FormAdapter(formElements));
+        recyclerView.setAdapter(new FormAdapter(formElements,formJasonObjectsContainer.getButtonThemeConfig(),
+                formJasonObjectsContainer.getTextFiledThemeConfig(),formJasonObjectsContainer.getDateThemeConfig()));
     }
 
     Pair<Boolean, String> isFormValid(){
@@ -59,7 +62,7 @@ public class FormManager implements ButtonFormObj.ButtonListener{
         return message;
     }
 
-    ArrayList<FormElement> createFormElements(String jsonArrayString, int layoutSpanCount){
+    FormJasonObjectsContainer createFormElements(String jsonArrayString, int layoutSpanCount){
         try {
             return JsonParser.convertToFormElementArrayList(jsonArrayString,this, layoutSpanCount);
         } catch (JSONException e) {

@@ -1,11 +1,18 @@
 package com.everteam.forumbuilder.utils;
 
+import android.graphics.Color;
+
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.everteam.forumbuilder.R;
 import com.everteam.forumbuilder.form.FormElement;
 import com.everteam.forumbuilder.formobjects.ButtonFormObj;
 import com.everteam.forumbuilder.formobjects.DateFormObj;
+import com.everteam.forumbuilder.formobjects.FormJasonObjectsContainer;
 import com.everteam.forumbuilder.formobjects.MultiSelectionFormObj;
 import com.everteam.forumbuilder.formobjects.TextFiledFormObj;
+import com.everteam.forumbuilder.themeconfigs.ButtonThemeConfig;
+import com.everteam.forumbuilder.themeconfigs.DateThemeConfig;
+import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 import com.everteam.forumbuilder.utils.KeyTypes;
 import com.everteam.forumbuilder.viewholders.DateViewHolder;
 import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
@@ -21,13 +28,48 @@ import java.util.Iterator;
 
 public class JsonParser {
 
- public static ArrayList<FormElement> convertToFormElementArrayList(String jsonString,
-                                                                    ButtonFormObj.ButtonListener buttonListener,
-                                                                    int layoutSpanCount) throws JSONException {
+ public static FormJasonObjectsContainer convertToFormElementArrayList(String jsonString,
+                                                                       ButtonFormObj.ButtonListener buttonListener,
+                                                                       int layoutSpanCount) throws JSONException {
 
      JSONObject formJsonObject = new JSONObject(jsonString);
-
      JSONObject styles = formJsonObject .getJSONObject("styles");
+
+     ///
+     JSONObject textFieldsStyle = styles.getJSONObject("textFieldsStyle");
+     String textFiledLableColor = getStringOrDefault(textFieldsStyle,"labelColor","#ffff");
+     String textFiledTextColor = getStringOrDefault(textFieldsStyle,"textFieldTextColor","#ffff");
+
+     TextFiledThemeConfig textFiledThemeConfig = new TextFiledThemeConfig.Builder().
+             setLableColor(Color.parseColor(textFiledLableColor)).
+             setTextColor(Color.parseColor(textFiledTextColor)).build();
+
+     ///
+     JSONObject dateFieldsStyle = styles.getJSONObject("dateFieldsStyle");
+
+     String dateColor = getStringOrDefault(dateFieldsStyle, "dateColor", "#ffff");
+     String dateLabelColor = getStringOrDefault(dateFieldsStyle, "labelColor", "#ffff");
+
+     DateThemeConfig dateThemeConfig = new DateThemeConfig.Builder().
+             setDateColor(Color.parseColor(dateColor)).setLableColor(Color.parseColor(dateLabelColor))
+            .build();
+
+////
+     JSONObject buttonFiledStyle = styles.getJSONObject("buttonsStyle");
+
+     String buttonTextColor = getStringOrDefault(buttonFiledStyle, "textColor", "#FFFFF");
+     String backgroundColor = getStringOrDefault(buttonFiledStyle, "backgroundColor", "#00000");
+
+     ButtonThemeConfig buttonThemeConfig = new ButtonThemeConfig.Builder().
+                                               setTextColor(Color.parseColor(buttonTextColor)).
+     setBackgroundColor(Color.parseColor(backgroundColor)).build();
+
+
+
+
+
+
+     JSONObject buttonsStyle    = styles.getJSONObject("buttonsStyle");
 
      JSONArray jsonArray = formJsonObject.getJSONArray("elements");
 
@@ -157,7 +199,7 @@ public class JsonParser {
             }
         }
 
-        return  formElements;
+        return  new FormJasonObjectsContainer(textFiledThemeConfig,dateThemeConfig,buttonThemeConfig,formElements);
     }
 
     private static String getStringOrDefault(JSONObject jsonObject, String key, String def) {

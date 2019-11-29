@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.everteam.forumbuilder.themeconfigs.ButtonThemeConfig;
+import com.everteam.forumbuilder.themeconfigs.DateThemeConfig;
 import com.everteam.forumbuilder.themeconfigs.MultiSelectThemConfig;
 import com.everteam.forumbuilder.themeconfigs.TextFiledThemeConfig;
 import com.everteam.forumbuilder.viewholders.AFormElementViewHolder;
+import com.everteam.forumbuilder.viewholders.DateViewHolder;
 import com.everteam.forumbuilder.viewholders.MultiSelectionFormViewHolder;
 import com.everteam.forumbuilder.viewholders.SubmitButtonViewHolder;
 import com.everteam.forumbuilder.viewholders.TextElementViewHolder;
@@ -21,10 +23,11 @@ import java.util.List;
 
 public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
 
+   DateThemeConfig       dateThemeConfig;
    List<FormElement>     mFormElements;
-   TextFiledThemeConfig textFiledThemeConfig;
+   TextFiledThemeConfig  textFiledThemeConfig;
    MultiSelectThemConfig multiSelectThemConfig;
-   ButtonThemeConfig buttonThemeConfig;
+   ButtonThemeConfig     buttonThemeConfig;
 
     ButtonThemeConfig getButtonThemeConfig(){
           return  buttonThemeConfig;
@@ -36,19 +39,22 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
          return textFiledThemeConfig;
     }
 
-    FormAdapter(List<FormElement> mFormEmFormElements){
+    FormAdapter(List<FormElement> mFormEmFormElements, ButtonThemeConfig buttonThemeConfig, TextFiledThemeConfig textFiledThemeConfig, DateThemeConfig dateThemeConfig){
 
         this.mFormElements = mFormEmFormElements;
 
         multiSelectThemConfig = new MultiSelectThemConfig.Builder().
                 setBackgoudnColor(Color.WHITE).build();
 
-        textFiledThemeConfig  = new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
+        this.textFiledThemeConfig = textFiledThemeConfig != null? textFiledThemeConfig : new TextFiledThemeConfig.Builder().setTextColor(Color.BLACK).
                 setBackgroundColor(Color.BLACK).setLableSize(12).setLableColor(Color.BLACK).setTextSize(15).build();
 
-        buttonThemeConfig   = new ButtonThemeConfig.Builder().setTextColor(Color.BLACK)
+        this.buttonThemeConfig = buttonThemeConfig != null ? buttonThemeConfig : new ButtonThemeConfig.Builder().setTextColor(Color.BLACK)
                 .setBackgroundColor(Color.BLUE)
                 .build();
+
+        this.dateThemeConfig = dateThemeConfig != null ? dateThemeConfig : new DateThemeConfig.Builder().
+                setDateColor(Color.BLACK).setLableColor(Color.BLACK).build();
     }
 
     @NonNull
@@ -102,13 +108,16 @@ public class FormAdapter extends RecyclerView.Adapter<AFormElementViewHolder> {
     public void onBindViewHolder(@NonNull AFormElementViewHolder aFormElementViewHolder, int i) {
 
         if(aFormElementViewHolder instanceof MultiSelectionFormViewHolder)
-        aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject());
+        aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), multiSelectThemConfig);
 
         if(aFormElementViewHolder instanceof TextElementViewHolder)
         aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), textFiledThemeConfig);
 
         if(aFormElementViewHolder instanceof SubmitButtonViewHolder)
             aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), buttonThemeConfig);
+
+        if(aFormElementViewHolder instanceof DateViewHolder)
+            aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject(), dateThemeConfig);
 
         else{
             aFormElementViewHolder.onBind(mFormElements.get(i).getBaseFormObject());
